@@ -5,6 +5,9 @@
     "html": {"minify": true},
     "js": {"compile": true, "minify": true}
   }],
+  "extraDependencies": [
+    "manifest.json"
+  ],
   "lint": {
     "rules": [
       "polymer-2"
