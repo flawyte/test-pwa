@@ -4,5 +4,6 @@
   "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
   "name": "test-pwa",
   "short_name": "test-pwa",
-  "start_url": "/test-pwa"
+  "start_url": "/test-pwa",
+  "theme_color": "#0D47A1"
 }
