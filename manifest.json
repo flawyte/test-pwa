@@ -2,6 +2,13 @@
   "background_color": "#2196F3",
   "display": "standalone",
   "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
+  "icons": [
+    {
+      "sizes": "256x256",
+      "src": "icon-256px.png",
+      "type": "image/png"
+    }
+  ],
   "name": "test-pwa",
   "short_name": "test-pwa",
   "start_url": "/test-pwa",
