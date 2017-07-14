@@ -1,13 +1,31 @@
+<link rel="import" href="../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="test-pwa-app">
   <template>
     <style>
       :host {
+        @apply --paper-font-headline;
+
         display: block;
       }
+
+      h1 {
+        margin: 1em;
+        text-align: center;
+      }
+      img {
+        width: 100%;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <h1>Some pics that I like</h1>
+
+    <img src="https://drscdn.500px.org/photo/85914655/q%3D80_m%3D2000/v2?sig=331c1bc0e58d2844112c12d2436d38e8aee0a862baa986ad5931c25e77ffc927"></img>
+    <img src="https://drscdn.500px.org/photo/12185519/q%3D80_m%3D2000/v2?sig=e89ac553372a7fac6756106afc7fae27b83bc3b53adecbb0d64414b4c391dd7f"></img>
+    <img src="https://drscdn.500px.org/photo/94715329/q%3D80_m%3D2000/v2?sig=2f8c5af03b563eae450246f811c7804968bcd12233ab7b9937a54d1d35026756"></img>
+    <img src="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></img>
   </template>
 
   <script>
@@ -16,14 +34,8 @@
      * @polymer
      */
     class TestPwaApp extends Polymer.Element {
-      static get is() { return 'test-pwa-app'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'test-pwa-app'
-          }
-        };
+      static get is() {
+        return 'test-pwa-app';
       }
     }
 
