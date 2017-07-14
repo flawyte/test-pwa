@@ -1,0 +1,12 @@
+{
+  "name": "test-pwa",
+  "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "^2.0.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "^1.0.1"
+  }
+}
