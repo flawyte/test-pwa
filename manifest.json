@@ -1,0 +1,7 @@
+{
+  "name": "test-pwa",
+  "short_name": "test-pwa",
+  "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
+  "start_url": "/",
+  "display": "standalone"
+}
