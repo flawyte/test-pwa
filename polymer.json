@@ -6,7 +6,7 @@
     "js": {"compile": true, "minify": true}
   }],
   "extraDependencies": [
-    "icon-256px.png",
+    "images/**/*",
     "manifest.json"
   ],
   "lint": {
