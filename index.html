@@ -17,6 +17,12 @@
 
     <test-pwa-app></test-pwa-app>
 
+    <script>
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+
     <style>
       body {
         margin: 0;

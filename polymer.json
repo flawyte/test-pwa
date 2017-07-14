@@ -7,7 +7,8 @@
   }],
   "extraDependencies": [
     "images/**/*",
-    "manifest.json"
+    "manifest.json",
+    "sw.js"
   ],
   "lint": {
     "rules": [
