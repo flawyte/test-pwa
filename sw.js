@@ -2,7 +2,6 @@ const version = 'v1';
 
 this.addEventListener('activate', (event) => {
   console.log('activate');
-  console.warn('Refresh to update!');
 
   event.waitUntil(
     caches.keys().then(function(keyList) {

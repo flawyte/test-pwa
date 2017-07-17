@@ -3,7 +3,9 @@
   "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
   "main": "index.html",
   "dependencies": {
+    "paper-button": "^2.0.0",
     "paper-styles": "^2.0.0",
+    "paper-toast": "^2.0.0",
     "polymer": "^2.0.1"
   },
   "devDependencies": {

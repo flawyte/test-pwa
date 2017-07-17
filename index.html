@@ -20,9 +20,7 @@
     <test-pwa-app></test-pwa-app>
 
     <script>
-      if (navigator.serviceWorker) {
-        navigator.serviceWorker.register('sw.js');
-      }
+      window.app = document.querySelector('test-pwa-app');
     </script>
 
     <style>

@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="test-pwa-app">
@@ -19,6 +21,12 @@
       img {
         width: 100%;
       }
+      paper-toast {
+        margin-left: calc(50vw - 144px);
+      }
+      paper-toast > paper-button {
+        color: #eeff41;
+      }
     </style>
 
     <h1>Some pics that I like</h1>
@@ -27,6 +35,10 @@
     <img src="https://drscdn.500px.org/photo/12185519/q%3D80_m%3D2000/v2?sig=e89ac553372a7fac6756106afc7fae27b83bc3b53adecbb0d64414b4c391dd7f"></img>
     <img src="https://drscdn.500px.org/photo/94715329/q%3D80_m%3D2000/v2?sig=2f8c5af03b563eae450246f811c7804968bcd12233ab7b9937a54d1d35026756"></img>
     <img src="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></img>
+
+    <paper-toast id="toast">
+      <paper-button id="positiveButton" on-tap="_onToastPositiveButtonTapped">Refresh</paper-button>
+    </paper-toast>
 
   </template>
 
@@ -38,6 +50,48 @@
     class TestPwaApp extends Polymer.Element {
       static get is() {
         return 'test-pwa-app';
+      }
+
+      _onToastPositiveButtonTapped() {
+        window.location.reload(true);
+      }
+
+      ready() {
+        super.ready();
+
+        if (navigator.serviceWorker)
+          this.registerServiceWorker();
+      }
+
+      registerServiceWorker() {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+          console.log('Service worker successfully registered!');
+
+          var serviceWorker;
+
+          if (reg.installing)
+            serviceWorker = reg.installing
+          else if (reg.waiting)
+            serviceWorker = reg.waiting;
+          else if (reg.active)
+            serviceWorker = reg.active;
+
+          if (serviceWorker)
+            serviceWorker.addEventListener('statechange', e => {
+              if (e.target.state === 'activated') {
+                this.$.toast.show({
+                  duration: 7000,
+                  text: 'Refresh to complete installation!'
+                });
+              }
+              else if (e.target.state === 'redundant') {
+                this.$.toast.show({
+                  duration: 7000,
+                  text: 'Refresh for the latest version'
+                });
+              }
+            });
+        });
       }
     }
 
