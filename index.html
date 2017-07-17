@@ -15,6 +15,8 @@
   </head>
   <body>
 
+    <!-- JavaScript is enabled -->
+
     <test-pwa-app></test-pwa-app>
 
     <script>
@@ -28,6 +30,32 @@
         margin: 0;
       }
     </style>
+
+    <!-- JavaScript is NOT enabled -->
+
+    <noscript>
+      <style>
+        body {
+          height: 100%;
+        }
+        html {
+          height: 100%;
+        }
+        noscript {
+          text-align: center;
+        }
+        noscript > div {
+          align-items: center;
+          display: flex;
+          height: 100%;
+          justify-content: center;
+        }
+      </style>
+
+      <div>
+        <p>You must have JavaScript enabled to use this web app.</p>
+      </div>
+    </noscript>
 
   </body>
 </html>
