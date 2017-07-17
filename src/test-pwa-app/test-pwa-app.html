@@ -67,6 +67,16 @@
         navigator.serviceWorker.register('sw.js').then(reg => {
           console.log('Service worker successfully registered!');
 
+          var supportsPassiveListener = false;
+          try {
+            var opts = Object.defineProperty({}, 'passive', {
+              get: function() {
+                supportsPassiveListener = true;
+              }
+            });
+            window.addEventListener('test', null, opts);
+          } catch (e) {}
+
           var serviceWorker;
 
           if (reg.installing)
@@ -90,7 +100,7 @@
                   text: 'Refresh for the latest version'
                 });
               }
-            });
+            }, supportsPassiveListener ? {passive: true} : false);
         });
       }
     }
