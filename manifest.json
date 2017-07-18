@@ -16,6 +16,6 @@
   ],
   "name": "test-pwa",
   "short_name": "test-pwa",
-  "start_url": "/test-pwa",
+  "start_url": "index.html",
   "theme_color": "#0D47A1"
 }
