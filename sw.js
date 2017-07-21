@@ -71,6 +71,10 @@ workboxSW.router.registerRoute(
   /.*fonts.googleapis.com.*/,
   workboxSW.strategies.networkFirst()
 );
+workboxSW.router.registerRoute(
+  /.*fonts.gstatic.com.*/,
+  workboxSW.strategies.networkFirst()
+);
 
 self.addEventListener('install', function(event) {
   if (typeof self.skipWaiting == 'function')
