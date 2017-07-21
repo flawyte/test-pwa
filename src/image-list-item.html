@@ -1,0 +1,48 @@
+<link rel="import" href="../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="image-list-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <div id="root"></div>
+  </template>
+
+  <script>
+    class ImageListItem extends Polymer.Element {
+      static get is() {
+        return 'image-list-item';
+      }
+
+      static get properties() {
+        return {
+          imageUrl: {
+            observer: '_imageUrlChanged',
+            type: String
+          }
+        };
+      }
+
+      _imageUrlChanged(newValue) {
+        this.$.root.style.background = 'url(' + newValue + ')';
+        this.$.root.style.backgroundPosition = 'center';
+        this.$.root.style.backgroundSize = 'cover';
+      }
+    }
+
+    window.customElements.define(ImageListItem.is, ImageListItem);
+  </script>
+</dom-module>

@@ -11,7 +11,7 @@
     <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
     <link rel="manifest" href="manifest.json">
-    <link rel="import" href="src/test-pwa-app/test-pwa-app.html">
+    <link rel="import" href="src/test-pwa-app.html">
   </head>
   <body>
 
@@ -25,7 +25,12 @@
 
     <style>
       body {
+        background: #eeeeee;
+        height: 100%;
         margin: 0;
+      }
+      html {
+        height: 100%;
       }
     </style>
 
@@ -33,12 +38,6 @@
 
     <noscript>
       <style>
-        body {
-          height: 100%;
-        }
-        html {
-          height: 100%;
-        }
         noscript {
           text-align: center;
         }

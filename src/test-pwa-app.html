@@ -1,0 +1,132 @@
+<link rel="import" href="../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="image-list-item.html">
+
+<dom-module id="test-pwa-app">
+  <template>
+    <style>
+      :host {
+        @apply --shadow-elevation-2dp;
+
+        background: white;
+        display: block;
+        height: 100%;
+        margin: auto;
+        max-width: 960px;
+        overflow: auto;
+      }
+
+      h1 {
+        @apply --paper-font-display2;
+
+        line-height: 1em;
+        margin: 0;
+        padding: 1em;
+        text-align: center;
+      }
+      image-list-item {
+        height: 96px;
+        margin-top: 0.25em;
+      }
+      paper-toast {
+        font-size: 1em;
+      }
+      paper-toast > paper-button {
+        color: #eeff41;
+      }
+    </style>
+
+    <h1>Some pics that I like</h1>
+
+    <image-list-item image-url="https://drscdn.500px.org/photo/85914655/q%3D80_m%3D2000/v2?sig=331c1bc0e58d2844112c12d2436d38e8aee0a862baa986ad5931c25e77ffc927"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/12185519/q%3D80_m%3D2000/v2?sig=e89ac553372a7fac6756106afc7fae27b83bc3b53adecbb0d64414b4c391dd7f"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/94715329/q%3D80_m%3D2000/v2?sig=2f8c5af03b563eae450246f811c7804968bcd12233ab7b9937a54d1d35026756"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></image-list-item>
+
+    <image-list-item image-url="https://drscdn.500px.org/photo/85914655/q%3D80_m%3D2000/v2?sig=331c1bc0e58d2844112c12d2436d38e8aee0a862baa986ad5931c25e77ffc927"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/12185519/q%3D80_m%3D2000/v2?sig=e89ac553372a7fac6756106afc7fae27b83bc3b53adecbb0d64414b4c391dd7f"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/94715329/q%3D80_m%3D2000/v2?sig=2f8c5af03b563eae450246f811c7804968bcd12233ab7b9937a54d1d35026756"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></image-list-item>
+
+    <image-list-item image-url="https://drscdn.500px.org/photo/85914655/q%3D80_m%3D2000/v2?sig=331c1bc0e58d2844112c12d2436d38e8aee0a862baa986ad5931c25e77ffc927"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/12185519/q%3D80_m%3D2000/v2?sig=e89ac553372a7fac6756106afc7fae27b83bc3b53adecbb0d64414b4c391dd7f"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/94715329/q%3D80_m%3D2000/v2?sig=2f8c5af03b563eae450246f811c7804968bcd12233ab7b9937a54d1d35026756"></image-list-item>
+    <image-list-item image-url="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></image-list-item>
+
+    <paper-toast id="toast">
+      <paper-button id="positiveButton" on-tap="_onToastPositiveButtonTapped"></paper-button>
+    </paper-toast>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TestPwaApp extends Polymer.Element {
+      static get is() {
+        return 'test-pwa-app';
+      }
+
+      _onToastPositiveButtonTapped() {
+        window.location.reload(true);
+      }
+
+      ready() {
+        super.ready();
+
+        if (navigator.serviceWorker)
+          this.registerServiceWorker();
+      }
+
+      registerServiceWorker() {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+          let supportsPassiveListener = false;
+          try {
+            const opts = Object.defineProperty({}, 'passive', {
+              get: function() {
+                supportsPassiveListener = true;
+              }
+            });
+            window.addEventListener('test', null, opts);
+          } catch (e) {}
+
+          reg.addEventListener('updatefound', () => {
+            const activeSW = reg.active;
+            const installingSW = reg.installing;
+            let toastText;
+            let toastButtonText;
+
+            // If first install
+            if (!activeSW) {
+              toastButtonText = 'Reload to finish';
+              toastText = 'Installation is almost complete';
+            }
+            // Else (if not first install)
+            else {
+              toastButtonText = 'Reload to update';
+              toastText = 'New version available';
+            }
+
+            installingSW.addEventListener('statechange', () => {
+              this.$.positiveButton.textContent = toastButtonText;
+              this.$.toast.text = toastText;
+
+              if (installingSW.state == 'activated') {
+                this.$.toast.show({
+                  duration: Infinity
+                });
+              }
+            }, supportsPassiveListener ? {passive: true} : false);
+          }, supportsPassiveListener ? {passive: true} : false);
+        });
+      }
+    }
+
+    window.customElements.define(TestPwaApp.is, TestPwaApp);
+  </script>
+</dom-module>
