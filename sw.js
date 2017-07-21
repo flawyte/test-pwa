@@ -52,7 +52,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "0c12c29bb6a264c0517315e8cfaf68ad"
+    "revision": "834139e5bb3fc0d375db4d1dee337913"
   },
   {
     "url": "manifest.json",
@@ -67,3 +67,8 @@ workboxSW.router.registerRoute(
   /.*500px.*/,
   workboxSW.strategies.networkFirst()
 );
+
+self.addEventListener('install', function(event) {
+  if (typeof self.skipWaiting == 'function')
+    self.skipWaiting();
+});
