@@ -22,7 +22,7 @@
         width: 100%;
       }
       paper-toast {
-        margin-left: calc(50vw - 144px);
+        font-size: 0.7em;
       }
       paper-toast > paper-button {
         color: #eeff41;
@@ -37,7 +37,7 @@
     <img src="https://drscdn.500px.org/photo/81026747/q%3D80_m%3D2000/v2?sig=2800ba95dea6abd3e7145b267b5c567852345ea3ef9fcb0a055d03e8c2ba34f1"></img>
 
     <paper-toast id="toast">
-      <paper-button id="positiveButton" on-tap="_onToastPositiveButtonTapped">Refresh</paper-button>
+      <paper-button id="positiveButton" on-tap="_onToastPositiveButtonTapped"></paper-button>
     </paper-toast>
 
   </template>
@@ -65,11 +65,9 @@
 
       registerServiceWorker() {
         navigator.serviceWorker.register('sw.js').then(reg => {
-          console.log('Service worker successfully registered!');
-
-          var supportsPassiveListener = false;
+          let supportsPassiveListener = false;
           try {
-            var opts = Object.defineProperty({}, 'passive', {
+            const opts = Object.defineProperty({}, 'passive', {
               get: function() {
                 supportsPassiveListener = true;
               }
@@ -77,30 +75,34 @@
             window.addEventListener('test', null, opts);
           } catch (e) {}
 
-          var serviceWorker;
+          reg.addEventListener('updatefound', () => {
+            const activeSW = reg.active;
+            const installingSW = reg.installing;
+            let toastText;
+            let toastButtonText;
 
-          if (reg.installing)
-            serviceWorker = reg.installing
-          else if (reg.waiting)
-            serviceWorker = reg.waiting;
-          else if (reg.active)
-            serviceWorker = reg.active;
+            // If first install
+            if (!activeSW) {
+              toastButtonText = 'Reload to finish';
+              toastText = 'Installation is almost complete';
+            }
+            // Else (if not first install)
+            else {
+              toastButtonText = 'Reload to update';
+              toastText = 'New version available';
+            }
 
-          if (serviceWorker)
-            serviceWorker.addEventListener('statechange', e => {
-              if (e.target.state === 'activated') {
+            installingSW.addEventListener('statechange', () => {
+              this.$.positiveButton.textContent = toastButtonText;
+              this.$.toast.text = toastText;
+
+              if (installingSW.state == 'activated') {
                 this.$.toast.show({
-                  duration: 7000,
-                  text: 'Refresh to complete installation!'
-                });
-              }
-              else if (e.target.state === 'redundant') {
-                this.$.toast.show({
-                  duration: 7000,
-                  text: 'Refresh for the latest version'
+                  duration: Infinity
                 });
               }
             }, supportsPassiveListener ? {passive: true} : false);
+          }, supportsPassiveListener ? {passive: true} : false);
         });
       }
     }

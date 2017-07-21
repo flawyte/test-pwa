@@ -12,4 +12,9 @@ workboxSW.router.registerRoute(
   /.*500px.*/,
   workboxSW.strategies.networkFirst()
 );
+
+self.addEventListener('install', function(event) {
+  if (typeof self.skipWaiting == 'function')
+    self.skipWaiting();
+});
 EOM
