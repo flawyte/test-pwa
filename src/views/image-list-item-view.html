@@ -1,8 +1,8 @@
-<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
-<link rel="import" href="../bower_components/shadycss/apply-shim.html">
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="image-list-item">
+<dom-module id="image-list-item-view">
   <template>
     <style>
       :host {
@@ -30,9 +30,9 @@
   </template>
 
   <script>
-    class ImageListItem extends Polymer.Element {
+    class ImageListItemView extends Polymer.Element {
       static get is() {
-        return 'image-list-item';
+        return 'image-list-item-view';
       }
 
       static get properties() {
@@ -51,6 +51,6 @@
       }
     }
 
-    window.customElements.define(ImageListItem.is, ImageListItem);
+    window.customElements.define(ImageListItemView.is, ImageListItemView);
   </script>
 </dom-module>
