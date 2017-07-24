@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../src/views/image-list-view.html">
+
+<dom-module id="image-list-view-demo">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <image-list-view></image-list-view>
+  </template>
+
+  <script>
+    class ImageListViewDemo extends Polymer.Element {
+      static get is() {
+        return 'image-list-view-demo';
+      }
+
+      static get properties() {
+        return {
+        };
+      }
+    }
+
+    window.customElements.define(ImageListViewDemo.is, ImageListViewDemo);
+  </script>
+</dom-module>
