@@ -29,7 +29,6 @@
           background: rgba(85, 85, 85, 0.25);
         }
         :host::-webkit-scrollbar-track {
-          /*background: transparent;*/
         }
       }
 
@@ -87,6 +86,28 @@
 
       _onToastPositiveButtonTapped() {
         window.location.reload(true);
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        console.log('connectedCallback()');
+
+        this.addEventListener('tap', this._onItemTapped);
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        console.log('disconnectedCallback()');
+
+        this.removeEventListener('tap', this._onItemTapped);
+      }
+
+      _onItemTapped(e) {
+        const origin = e.path[2];
+
+        if (origin.nodeName != 'IMAGE-LIST-ITEM') return;
+
+        console.log(origin);
       }
 
       ready() {
