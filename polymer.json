@@ -1,6 +1,6 @@
 {
   "builds": [{
-    "bundle": true,
+    "bundle": false,
     "css": {"minify": true},
     "html": {"minify": true},
     "js": {"compile": true, "minify": true}
