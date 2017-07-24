@@ -1,3 +1,4 @@
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="../bower_components/shadycss/apply-shim.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
@@ -5,20 +6,27 @@
   <template>
     <style>
       :host {
+        cursor: pointer;
         display: block;
       }
 
       img {
         width: 100%;
       }
+      paper-ripple {
+        color: white;
+      }
 
       #root {
         height: 100%;
+        position: relative;
         width: 100%;
       }
     </style>
 
-    <div id="root"></div>
+    <div id="root">
+      <paper-ripple></paper-ripple>
+    </div>
   </template>
 
   <script>
