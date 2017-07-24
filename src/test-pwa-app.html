@@ -20,6 +20,19 @@
         overflow: auto;
       }
 
+      @media (min-width: 1025px) {
+        :host::-webkit-scrollbar {
+          background: transparent;
+          width: 0.75em;
+        }
+        :host::-webkit-scrollbar-thumb {
+          background: rgba(85, 85, 85, 0.25);
+        }
+        :host::-webkit-scrollbar-track {
+          /*background: transparent;*/
+        }
+      }
+
       h1 {
         @apply --paper-font-display2;
 
