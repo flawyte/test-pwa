@@ -1,0 +1,29 @@
+<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="splash-view">
+  <template>
+    <style>
+      :host {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
+    </style>
+
+    <paper-progress indeterminate></paper-progress>
+  </template>
+
+  <script>
+    class SplashView extends Polymer.Element {
+      static get is() {
+        return 'splash-view';
+      }
+    }
+
+    window.customElements.define(SplashView.is, SplashView);
+  </script>
+</dom-module>

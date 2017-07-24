@@ -4,6 +4,7 @@
   "main": "index.html",
   "dependencies": {
     "paper-button": "^2.0.0",
+    "paper-progress": "^2.0.1",
     "paper-ripple": "PolymerElements/paper-ripple#^2.0.1",
     "paper-styles": "^2.0.0",
     "paper-toast": "^2.0.0",
