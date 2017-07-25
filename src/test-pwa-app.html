@@ -51,8 +51,26 @@
         return 'test-pwa-app';
       }
 
+      constructor() {
+        super();
+        this.fragments = [];
+        this.visibleFragments = [];
+      }
+
       _onToastPositiveButtonTapped() {
         window.location.reload(true);
+      }
+
+      initFragments() {
+        this.fragments = [
+          this.$.mainFragment,
+          this.$.splashFragment
+        ];
+
+        this.fragments.forEach(item => {
+          item.frame = this;
+          item.style.display = 'none';
+        });
       }
 
       ready() {
@@ -61,12 +79,8 @@
         if (navigator.serviceWorker)
           this.registerServiceWorker();
 
-        this.$.mainFragment.style.display = 'none';
-
-        setTimeout(() => {
-          this.$.mainFragment.style.display = '';
-          this.$.splashFragment.style.display = 'none';
-        }, 1000);
+        this.initFragments();
+        this.setVisibleFragment(this.$.splashFragment);
       }
 
       registerServiceWorker() {
@@ -110,6 +124,23 @@
             }, supportsPassiveListener ? {passive: true} : false);
           }, supportsPassiveListener ? {passive: true} : false);
         });
+      }
+
+      setVisibleFragment(fragment) {
+        if (this.visibleFragments.indexOf(fragment) !== -1) return;
+
+        this.visibleFragments.forEach(item => {
+          item.style.display = 'none';
+          (typeof item.onInvisible === 'function') && item.onInvisible();
+        });
+
+        fragment.style.display = '';
+        (typeof fragment.onVisible === 'function') && fragment.onVisible();
+        this.visibleFragments = [fragment];
+      }
+
+      setVisibleFragmentByTag(tag) {
+        this.setVisibleFragment(this.shadowRoot.querySelector(tag));
       }
     }
 

@@ -19,6 +19,22 @@
       static get is() {
         return 'splash-fragment';
       }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          setTimeout(() => this.frame.setVisibleFragmentByTag('main-fragment'), 1000);
+        });
+      }
+
+      onVisible() {
+        console.log('onVisible()');
+      }
+
+      onInvisible() {
+        console.log('onInvisible()');
+      }
     }
 
     window.customElements.define(SplashFragment.is, SplashFragment);

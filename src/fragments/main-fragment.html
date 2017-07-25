@@ -21,6 +21,14 @@
       static get is() {
         return 'main-fragment';
       }
+
+      onVisible() {
+        console.log('onVisible()');
+      }
+
+      onInvisible() {
+        console.log('onInvisible()');
+      }
     }
 
     window.customElements.define(MainFragment.is, MainFragment);
