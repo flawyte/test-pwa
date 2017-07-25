@@ -1,8 +1,8 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="views/fragments/main-view.html">
-<link rel="import" href="views/fragments/splash-view.html">
+<link rel="import" href="fragments/main-fragment.html">
+<link rel="import" href="fragments/splash-fragment.html">
 
 <dom-module id="test-pwa-app">
   <template>
@@ -33,10 +33,10 @@
 
     <div id="frame">
       <div>
-        <splash-view id="splashView"></splash-view>
+        <splash-fragment id="splashFragment"></splash-fragment>
       </div>
       <div>
-        <main-view id="mainView"></main-view>
+        <main-fragment id="mainFragment"></main-fragment>
       </div>
     </div>
 
@@ -61,11 +61,11 @@
         if (navigator.serviceWorker)
           this.registerServiceWorker();
 
-        this.$.mainView.style.display = 'none';
+        this.$.mainFragment.style.display = 'none';
 
         setTimeout(() => {
-          this.$.mainView.style.display = '';
-          this.$.splashView.style.display = 'none';
+          this.$.mainFragment.style.display = '';
+          this.$.splashFragment.style.display = 'none';
         }, 1000);
       }
 
