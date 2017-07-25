@@ -63,6 +63,10 @@ const fileManifest = [
     "revision": "6f104f16e5d06d343db51ad3d677359a"
   },
   {
+    "url": "bower_components/iron-range-behavior/iron-range-behavior.html",
+    "revision": "6d67a291eddd5b28eccf030e10619fb1"
+  },
+  {
     "url": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
     "revision": "27c88a20af51af52dcb353d2e5b9f8d8"
   },
@@ -79,8 +83,16 @@ const fileManifest = [
     "revision": "e56a59ed88bb90e19df8338c53e984a5"
   },
   {
+    "url": "bower_components/paper-progress/paper-progress.html",
+    "revision": "23cd92972a174049865447ca4adc08c0"
+  },
+  {
     "url": "bower_components/paper-ripple/paper-ripple.html",
     "revision": "8cb2d836f86ca84aaad9fe07b032276d"
+  },
+  {
+    "url": "bower_components/paper-styles/color.html",
+    "revision": "549925227bc04f9c17b52e2e35cd2e26"
   },
   {
     "url": "bower_components/paper-styles/element-styles/paper-material-styles.html",
@@ -300,19 +312,43 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "601a641bebb78c8693bd3112c16b27c5"
+    "revision": "67172fa613b869891284b987877779df"
   },
   {
     "url": "manifest.json",
     "revision": "a592faf973bd12d3a4e4f2fdaa7fced8"
   },
   {
+    "url": "src/core/services/five-hundred-px-service.html",
+    "revision": "f9fcb0db035308df8bcaf9d51406bca7"
+  },
+  {
+    "url": "src/core/services/five-hundred-px-service.js",
+    "revision": "0cad252d9263a3258df0542f8b18cb23"
+  },
+  {
+    "url": "src/core/storages/five-hundred-px-storage-worker.js",
+    "revision": "ad6180c3a92bfb9e77614767a38c3d32"
+  },
+  {
+    "url": "src/core/storages/five-hundred-px-storage.html",
+    "revision": "f77c418dcfac95b89f564ff988e6404c"
+  },
+  {
+    "url": "src/fragments/main-fragment.html",
+    "revision": "d657ab2363f77518fd1e24f62221610d"
+  },
+  {
+    "url": "src/fragments/splash-fragment.html",
+    "revision": "878db79688e9a67cb248609773df91a8"
+  },
+  {
     "url": "src/test-pwa-app.html",
-    "revision": "bdfc1e92044c316f5db65b78f96e55f5"
+    "revision": "231f3fd8cbaa3926c0e5f2f18fda2baa"
   },
   {
     "url": "src/views/fragments/main-view.html",
-    "revision": "10b6aa5483f465cb3de4c5a0fd2cf38d"
+    "revision": "9d72f71ea536af6229c7267b1aca48f8"
   },
   {
     "url": "src/views/fragments/splash-view.html",
@@ -324,7 +360,7 @@ const fileManifest = [
   },
   {
     "url": "src/views/image-list-view.html",
-    "revision": "712b6182fcd473ba82a3040ee1d669d9"
+    "revision": "9c98c456d0485f5208269558706cb3e9"
   }
 ];
 
