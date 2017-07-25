@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../views/fragments/splash-view.html">
+
+<dom-module id="splash-fragment">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <splash-view></splash-view>
+  </template>
+
+  <script>
+    class SplashFragment extends Polymer.Element {
+      static get is() {
+        return 'splash-fragment';
+      }
+    }
+
+    window.customElements.define(SplashFragment.is, SplashFragment);
+  </script>
+</dom-module>
