@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="views/fragments/main-view.html">
+<link rel="import" href="views/fragments/splash-view.html">
 
 <dom-module id="test-pwa-app">
   <template>
@@ -18,9 +19,26 @@
       paper-toast > paper-button {
         color: #eeff41;
       }
+
+      #frame {
+        height: 100%;
+        width: 100%;
+      }
+      #frame > * {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+      }
     </style>
 
-    <main-view></main-view>
+    <div id="frame">
+      <div>
+        <splash-view id="splashView"></splash-view>
+      </div>
+      <div>
+        <main-view id="mainView"></main-view>
+      </div>
+    </div>
 
     <paper-toast id="toast">
       <paper-button id="positiveButton" on-tap="_onToastPositiveButtonTapped"></paper-button>
@@ -42,6 +60,13 @@
 
         if (navigator.serviceWorker)
           this.registerServiceWorker();
+
+        this.$.mainView.style.display = 'none';
+
+        setTimeout(() => {
+          this.$.mainView.style.display = '';
+          this.$.splashView.style.display = 'none';
+        }, 1000);
       }
 
       registerServiceWorker() {
