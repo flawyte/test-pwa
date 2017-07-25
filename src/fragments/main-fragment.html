@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../core/storages/five-hundred-px-storage.html">
+<link rel="import" href="../views/fragments/main-view.html">
+
+<dom-module id="main-fragment">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <five-hundred-px-storage items="{{items}}"></five-hundred-px-storage>
+    <main-view images="[[items]]"></main-view>
+  </template>
+
+  <script>
+    class MainFragment extends Polymer.Element {
+      static get is() {
+        return 'main-fragment';
+      }
+    }
+
+    window.customElements.define(MainFragment.is, MainFragment);
+  </script>
+</dom-module>

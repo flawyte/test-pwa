@@ -45,13 +45,19 @@
 
     <h1>Some pics that I like</h1>
 
-    <image-list-view></image-list-view>
+    <image-list-view items="[[images]]"></image-list-view>
   </template>
 
   <script>
     class MainView extends Polymer.Element {
       static get is() {
         return 'main-view';
+      }
+
+      static get properties() {
+        return {
+          images: Array
+        };
       }
     }
 
