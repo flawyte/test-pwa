@@ -2,6 +2,7 @@
 
 polymer build
 
+cp src/core/services/*-service.js build/default/src/core/services/
 cp workbox-cli-config.js build/default/
 cd build/default/
 workbox-cli generate:sw
