@@ -319,12 +319,16 @@ const fileManifest = [
     "revision": "a592faf973bd12d3a4e4f2fdaa7fced8"
   },
   {
+    "url": "src/core/services/five-hundred-px-service-worker.js",
+    "revision": "b3556d466938054746ee3ecce3b8d809"
+  },
+  {
     "url": "src/core/services/five-hundred-px-service.html",
-    "revision": "f9fcb0db035308df8bcaf9d51406bca7"
+    "revision": "a5f147755ad85f962c411d414f9acf5d"
   },
   {
     "url": "src/core/services/five-hundred-px-service.js",
-    "revision": "0cad252d9263a3258df0542f8b18cb23"
+    "revision": "ee53540852242d4731469300bed74f0c"
   },
   {
     "url": "src/core/storages/five-hundred-px-storage-worker.js",
@@ -336,11 +340,11 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/main-fragment.html",
-    "revision": "d657ab2363f77518fd1e24f62221610d"
+    "revision": "54c36c8c7f43abb56e3514da20d2bc2b"
   },
   {
     "url": "src/fragments/splash-fragment.html",
-    "revision": "878db79688e9a67cb248609773df91a8"
+    "revision": "20f0b3a8c1497a2ff359df734963acd2"
   },
   {
     "url": "src/test-pwa-app.html",
@@ -348,7 +352,7 @@ const fileManifest = [
   },
   {
     "url": "src/views/fragments/main-view.html",
-    "revision": "9d72f71ea536af6229c7267b1aca48f8"
+    "revision": "351b0655014c9029b349119990bc127a"
   },
   {
     "url": "src/views/fragments/splash-view.html",
