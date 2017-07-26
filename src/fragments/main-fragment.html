@@ -13,6 +13,7 @@
       }
     </style>
 
+    <five-hundred-px-service id="service"></five-hundred-px-service>
     <five-hundred-px-storage id="storage" items="{{items}}"></five-hundred-px-storage>
     <main-view id="view" images="[[items]]"></main-view>
   </template>
@@ -23,21 +24,16 @@
         return 'main-fragment';
       }
 
-      ready() {
-        super.ready();
-        this.service = new FiveHundredPxService();
+      onInvisible() {
+        console.log('onInvisible()');
       }
 
       onVisible() {
         console.log('onVisible()');
 
-        this.service.fetch().then(photos => {
+        this.$.service.fetch().then(photos => {
           this.$.storage.items = photos.map(item => item.image_url);
         });
-      }
-
-      onInvisible() {
-        console.log('onInvisible()');
       }
     }
 

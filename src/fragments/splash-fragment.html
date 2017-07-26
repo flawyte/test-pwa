@@ -20,20 +20,20 @@
         return 'splash-fragment';
       }
 
-      ready() {
-        super.ready();
-
-        Polymer.RenderStatus.afterNextRender(this, () => {
-          setTimeout(() => this.frame.setVisibleFragmentByTag('main-fragment'), 1000);
-        });
+      onInvisible() {
+        console.log('onInvisible()');
       }
 
       onVisible() {
         console.log('onVisible()');
       }
 
-      onInvisible() {
-        console.log('onInvisible()');
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          setTimeout(() => this.frame.setVisibleFragmentByTag('main-fragment'), 1000);
+        });
       }
     }
 
