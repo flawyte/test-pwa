@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../core/services/five-hundred-px-service.html">
-<link rel="import" href="../core/storages/five-hundred-px-storage.html">
+<link rel="import" href="../fragments/home-fragment.html">
 <link rel="import" href="../views/fragments/main-view.html">
 
 <dom-module id="main-fragment">
@@ -13,9 +12,9 @@
       }
     </style>
 
-    <five-hundred-px-service id="service"></five-hundred-px-service>
-    <five-hundred-px-storage id="storage" items="{{items}}"></five-hundred-px-storage>
-    <main-view id="view" images="[[items]]"></main-view>
+    <main-view>
+      <home-fragment id="home"></home-fragment>
+    </main-view>
   </template>
 
   <script>
@@ -24,16 +23,52 @@
         return 'main-fragment';
       }
 
+      constructor() {
+        super();
+        this.fragments = [];
+        this.visibleFragments = [];
+      }
+
+      initFragments() {
+        this.fragments = [
+          this.$.home
+        ];
+
+        this.fragments.forEach(item => {
+          item.frame = this;
+          item.style.display = 'none';
+        });
+      }
+
       onInvisible() {
         console.log('onInvisible()');
       }
 
       onVisible() {
         console.log('onVisible()');
+        this.setVisibleFragment(this.$.home);
+      }
 
-        this.$.service.fetch().then(photos => {
-          this.$.storage.items = photos.map(item => item.image_url);
+      ready() {
+        super.ready();
+        this.initFragments();
+      }
+
+      setVisibleFragment(fragment) {
+        if (this.visibleFragments.indexOf(fragment) !== -1) return;
+
+        this.visibleFragments.forEach(item => {
+          item.style.display = 'none';
+          (typeof item.onInvisible === 'function') && item.onInvisible();
         });
+
+        fragment.style.display = '';
+        (typeof fragment.onVisible === 'function') && fragment.onVisible();
+        this.visibleFragments = [fragment];
+      }
+
+      setVisibleFragmentByTag(tag) {
+        this.setVisibleFragment(this.shadowRoot.querySelector(tag));
       }
     }
 
