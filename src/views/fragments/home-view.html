@@ -1,0 +1,62 @@
+<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../image-list-view.html">
+
+<dom-module id="home-view">
+  <template>
+    <style>
+      :host {
+        background: white;
+        display: block;
+        height: 100%;
+        overflow: auto;
+      }
+
+      h1 {
+        @apply --paper-font-display2;
+
+        line-height: 1em;
+        margin: 0;
+        padding: 1em;
+        text-align: center;
+      }
+      image-list-view {
+        width: 100%;
+      }
+
+      @media (min-width: 1025px) {
+        :host::-webkit-scrollbar {
+          background: transparent;
+          width: 0.75em;
+        }
+        :host::-webkit-scrollbar-thumb {
+          background: rgba(85, 85, 85, 0.25);
+        }
+        :host::-webkit-scrollbar-track {
+        }
+      }
+    </style>
+
+    <h1>#colors from 500px</h1>
+
+    <image-list-view items="[[images]]"></image-list-view>
+  </template>
+
+  <script>
+    class HomeView extends Polymer.Element {
+      static get is() {
+        return 'home-view';
+      }
+
+      static get properties() {
+        return {
+          images: Array
+        };
+      }
+    }
+
+    window.customElements.define(HomeView.is, HomeView);
+  </script>
+</dom-module>
