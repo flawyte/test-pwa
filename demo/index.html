@@ -28,7 +28,7 @@
             elementPath.lastIndexOf('.html')
           );
 
-          let el = document.createElement(elementName);
+          window.el = document.createElement(elementName);
           document.body.appendChild(el);
         }, (event) => {
           console.log(event);
