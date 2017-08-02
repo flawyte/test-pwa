@@ -424,11 +424,11 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/home-fragment.html",
-    "revision": "543ac46b33172904ecabb3b958ec9285"
+    "revision": "a4ac0f07863c8a4b39d4216a8a4a2f4c"
   },
   {
     "url": "src/fragments/image-details-fragment.html",
-    "revision": "ea45fe1722009c956d600e3f72e26195"
+    "revision": "3028bff8f38b215b1e4fbe641df0403a"
   },
   {
     "url": "src/fragments/main-fragment.html",
