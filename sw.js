@@ -424,7 +424,7 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/home-fragment.html",
-    "revision": "18c611885a76370dbcd65f1b03a8a01a"
+    "revision": "543ac46b33172904ecabb3b958ec9285"
   },
   {
     "url": "src/fragments/image-details-fragment.html",
