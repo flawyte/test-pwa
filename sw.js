@@ -440,7 +440,7 @@ const fileManifest = [
   },
   {
     "url": "src/test-pwa-app.html",
-    "revision": "cd9ccd1b4d5b89296f4378189b6073d7"
+    "revision": "8b306b184425aab8e6bc14492c820eac"
   },
   {
     "url": "src/views/fragments/home-view.html",
