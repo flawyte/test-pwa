@@ -19,6 +19,62 @@ importScripts('workbox-sw.prod.v1.1.0.js');
  */
 const fileManifest = [
   {
+    "url": "bower_components/app-layout/app-header-layout/app-header-layout.html",
+    "revision": "d3072f8cf30de94a99ac4825d1e07df8"
+  },
+  {
+    "url": "bower_components/app-layout/app-header/app-header.html",
+    "revision": "62d69c07d519c29122a10f54fee304af"
+  },
+  {
+    "url": "bower_components/app-layout/app-layout-behavior/app-layout-behavior.html",
+    "revision": "a64d340503d802c441f231999bc50513"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/app-scroll-effects-behavior.html",
+    "revision": "ffadeb52557b2c0fc7a28ff106903622"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/app-scroll-effects.html",
+    "revision": "47ef4a1229fe38f7ebb0b846676908c9"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/blend-background.html",
+    "revision": "cb65065f730d76538be3d15794650adf"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/fade-background.html",
+    "revision": "d7fe94ca7c381f0d814ae8f03e7a1707"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/material.html",
+    "revision": "93d85d4f6d42fd57d73fda270f8b8b5d"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/parallax-background.html",
+    "revision": "cb919252b3b9eb1c7d57fc7022353c9a"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/resize-snapped-title.html",
+    "revision": "e1917db70703c8af036b1a29fd7d6237"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/resize-title.html",
+    "revision": "91cbbf08e10ad1d60804d5403f10b679"
+  },
+  {
+    "url": "bower_components/app-layout/app-scroll-effects/effects/waterfall.html",
+    "revision": "af6cf17fbb4f94216eea9d2e6c26a775"
+  },
+  {
+    "url": "bower_components/app-layout/app-toolbar/app-toolbar.html",
+    "revision": "1969068eeac3ed606025f04bf7871282"
+  },
+  {
+    "url": "bower_components/app-layout/helpers/helpers.html",
+    "revision": "1da38888481edb36a5d7f15a8633dd9f"
+  },
+  {
     "url": "bower_components/font-roboto/roboto.html",
     "revision": "22fe760d42278ca3b2b3718390fbb1bd"
   },
@@ -47,6 +103,22 @@ const fileManifest = [
     "revision": "3e285c2698feec264710fffd609630ad"
   },
   {
+    "url": "bower_components/iron-icon/iron-icon.html",
+    "revision": "cb0fc2d7d07009ab937d42c387acf9e1"
+  },
+  {
+    "url": "bower_components/iron-icons/iron-icons.html",
+    "revision": "f167b940536136378cba6ddbc6bb00d0"
+  },
+  {
+    "url": "bower_components/iron-iconset-svg/iron-iconset-svg.html",
+    "revision": "5cc50c1115e3a7691ffb98ee8a50ab0f"
+  },
+  {
+    "url": "bower_components/iron-meta/iron-meta.html",
+    "revision": "90994d903095f9fd3bca0318cadf5e1f"
+  },
+  {
     "url": "bower_components/iron-overlay-behavior/iron-focusables-helper.html",
     "revision": "486e6418f8454f518a23281d0ff3ca99"
   },
@@ -71,8 +143,16 @@ const fileManifest = [
     "revision": "27c88a20af51af52dcb353d2e5b9f8d8"
   },
   {
+    "url": "bower_components/iron-scroll-target-behavior/iron-scroll-target-behavior.html",
+    "revision": "58238ea481cc89dd8bc3eb98d30a2bba"
+  },
+  {
     "url": "bower_components/paper-behaviors/paper-button-behavior.html",
     "revision": "793782859ac11addc2f665dda089da48"
+  },
+  {
+    "url": "bower_components/paper-behaviors/paper-inky-focus-behavior.html",
+    "revision": "891a915a3403caeff1fc3a4a9ed1e9c3"
   },
   {
     "url": "bower_components/paper-behaviors/paper-ripple-behavior.html",
@@ -81,6 +161,10 @@ const fileManifest = [
   {
     "url": "bower_components/paper-button/paper-button.html",
     "revision": "e56a59ed88bb90e19df8338c53e984a5"
+  },
+  {
+    "url": "bower_components/paper-icon-button/paper-icon-button.html",
+    "revision": "48eec3cbac79a0fc3778854e1b0996ba"
   },
   {
     "url": "bower_components/paper-progress/paper-progress.html",
@@ -93,6 +177,10 @@ const fileManifest = [
   {
     "url": "bower_components/paper-styles/color.html",
     "revision": "549925227bc04f9c17b52e2e35cd2e26"
+  },
+  {
+    "url": "bower_components/paper-styles/default-theme.html",
+    "revision": "5357609d26772a270098c0e3ebb1bb98"
   },
   {
     "url": "bower_components/paper-styles/element-styles/paper-material-styles.html",
@@ -331,16 +419,20 @@ const fileManifest = [
     "revision": "ee53540852242d4731469300bed74f0c"
   },
   {
-    "url": "src/core/storages/five-hundred-px-storage-worker.js",
-    "revision": "ad6180c3a92bfb9e77614767a38c3d32"
-  },
-  {
     "url": "src/core/storages/five-hundred-px-storage.html",
     "revision": "f77c418dcfac95b89f564ff988e6404c"
   },
   {
+    "url": "src/fragments/home-fragment.html",
+    "revision": "24e2ad384fac869693b6bb5e96654792"
+  },
+  {
+    "url": "src/fragments/image-details-fragment.html",
+    "revision": "ea45fe1722009c956d600e3f72e26195"
+  },
+  {
     "url": "src/fragments/main-fragment.html",
-    "revision": "54c36c8c7f43abb56e3514da20d2bc2b"
+    "revision": "8daab01079d903a4443cbc52ea5a7ea5"
   },
   {
     "url": "src/fragments/splash-fragment.html",
@@ -348,11 +440,19 @@ const fileManifest = [
   },
   {
     "url": "src/test-pwa-app.html",
-    "revision": "231f3fd8cbaa3926c0e5f2f18fda2baa"
+    "revision": "4528d94855d298d3af590fa1736c8789"
+  },
+  {
+    "url": "src/views/fragments/home-view.html",
+    "revision": "8aeb1f3327f559230ceb33ff3cff5642"
+  },
+  {
+    "url": "src/views/fragments/image-details-view.html",
+    "revision": "d6e64b6c331630452f58347b51320d5c"
   },
   {
     "url": "src/views/fragments/main-view.html",
-    "revision": "351b0655014c9029b349119990bc127a"
+    "revision": "688e306fc5a5bac46fc9524168ce5940"
   },
   {
     "url": "src/views/fragments/splash-view.html",
@@ -364,7 +464,7 @@ const fileManifest = [
   },
   {
     "url": "src/views/image-list-view.html",
-    "revision": "9c98c456d0485f5208269558706cb3e9"
+    "revision": "bae9039d6e11e5e065aecc2b20b1f7f1"
   }
 ];
 

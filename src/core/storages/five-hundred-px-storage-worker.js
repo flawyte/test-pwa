@@ -1,1 +1,0 @@
-importScripts('../../../bower_components/localforage/dist/localforage.min.js');var id=Math.floor(1e3*Math.random()+1);onmessage=function(b){console.log('['+id+'] '+b.data)};
