@@ -1,0 +1,125 @@
+<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="image-details-view">
+  <template>
+    <style>
+      :host {
+        @apply --paper-font-common-base;
+
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+
+      app-header {
+        --app-header-background-front-layer: {
+          background-image: var(--image-url);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          color: blue;
+        };
+
+        background-color: white;
+        height: 50%;
+      }
+      app-header-layout > div {
+        padding: 24px;
+      }
+      app-toolbar {
+        --paper-icon-button-ink-color: white;
+
+        color: white;
+        height: 64px;
+      }
+      app-toolbar > [main-title] {
+        font-size: 1.4rem;
+        margin-left: 16px;
+      }
+
+      .col {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+      }
+      .col:first-child {
+        flex: 0.25;
+        font-size: 1.25rem;
+        font-weight: bold;
+        justify-content: flex-start;
+        text-transform: lowercase;
+      }
+      .col:last-child {
+        font-weight: 100;
+        justify-content: flex-end;
+        text-align: right;
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+    </style>
+
+    <app-header-layout>
+      <app-header slot="header" condenses effects="parallax-background waterfall" fixed shadow>
+        <app-toolbar>
+          <paper-icon-button icon="arrow-back" id="back" on-tap="_onToolbarItemTapped"></paper-icon-button>
+          <div main-title>[[image.name]]</div>
+          <paper-icon-button icon="launch" id="open" on-tap="_onToolbarItemTapped"></paper-icon-button>
+        </app-toolbar>
+      </app-header>
+
+      <div>
+        <div class="row">
+          <div class="col">Author</div>
+          <div class="col">
+            [[image.user.firstname]] [[image.user.lastname]]
+            (<a href="https://500px.com/[[image.user.username]]" target="_blank">@[[image.user.username]]</a>)
+          </div>
+        </div>
+      </div>
+    </app-header-layout>
+  </template>
+
+  <script>
+    class ImageDetailsView extends Polymer.Element {
+      static get is() {
+        return 'image-details-view';
+      }
+
+      static get properties() {
+        return {
+          image: {
+            observer: '_imageChanged',
+            type: Object
+          }
+        };
+      }
+
+      _imageChanged(newValue) {
+        if (!newValue) return;
+
+        this.updateStyles({
+          '--image-url': 'url(' + newValue.image_url + ')'
+        });
+      }
+
+      _onToolbarItemTapped(event) {
+        if (event.target.id == 'open')
+          window.open(this.image.image_url);
+      }
+    }
+
+    window.customElements.define(ImageDetailsView.is, ImageDetailsView);
+  </script>
+</dom-module>

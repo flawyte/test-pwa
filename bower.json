@@ -3,7 +3,10 @@
   "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
   "main": "index.html",
   "dependencies": {
+    "app-layout": "^2.0.1",
+    "iron-icons": "^2.0.1",
     "paper-button": "^2.0.0",
+    "paper-icon-button": "^2.0.0",
     "paper-progress": "^2.0.1",
     "paper-ripple": "PolymerElements/paper-ripple#^2.0.1",
     "paper-styles": "^2.0.0",

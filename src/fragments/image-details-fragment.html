@@ -1,0 +1,126 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../views/fragments/image-details-view.html">
+
+<dom-module id="image-details-fragment">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <image-details-view id="view"></image-details-view>
+  </template>
+
+  <script>
+    class ImageDetailsFragment extends Polymer.Element {
+      static get is() {
+        return 'image-details-fragment';
+      }
+
+      onInvisible() {
+        console.log('onInvisible()');
+      }
+
+      onVisible() {
+        console.log('onVisible()');
+      }
+
+      ready() {
+        super.ready();
+
+        // this.$.view.image = {
+        //   "id": 221923243,
+        //   "user_id": 15839399,
+        //   "name": "Train",
+        //   "description": "Main railway station in Wrocław/Poland",
+        //   "camera": "ILCE-6000",
+        //   "lens": "----",
+        //   "focal_length": "0",
+        //   "iso": "200",
+        //   "shutter_speed": "30",
+        //   "aperture": "0.0",
+        //   "times_viewed": 38,
+        //   "rating": 84.8,
+        //   "status": 1,
+        //   "created_at": "2017-07-31T07:54:03-04:00",
+        //   "category": 30,
+        //   "location": null,
+        //   "latitude": 51.1078852,
+        //   "longitude": 17.0385376,
+        //   "taken_at": "2017-02-12T14:06:58-05:00",
+        //   "hi_res_uploaded": 0,
+        //   "for_sale": false,
+        //   "width": 6000,
+        //   "height": 4000,
+        //   "votes_count": 17,
+        //   "favorites_count": 0,
+        //   "comments_count": 0,
+        //   "nsfw": false,
+        //   "sales_count": 0,
+        //   "for_sale_date": null,
+        //   "highest_rating": 84.8,
+        //   "highest_rating_date": "2017-07-31T09:04:02-04:00",
+        //   "license_type": 0,
+        //   "converted": 0,
+        //   "collections_count": 0,
+        //   "crop_version": 0,
+        //   "privacy": false,
+        //   "profile": true,
+        //   "for_critique": false,
+        //   "critiques_callout_dismissed": false,
+        //   "image_url": "https://drscdn.500px.org/photo/221923243/m%3D1080_k%3D1_a%3D1/v2?client_application_id=41313&webp=true&sig=fdf67062861ba9cca253a69e2fddc11ed8c1b0f096473ddc172658f589f27f2b",
+        //   "images": [{
+        //     "size": 1080,
+        //     "url": "https://drscdn.500px.org/photo/221923243/m%3D1080_k%3D1_a%3D1/v2?client_application_id=41313&webp=true&sig=fdf67062861ba9cca253a69e2fddc11ed8c1b0f096473ddc172658f589f27f2b",
+        //     "https_url": "https://drscdn.500px.org/photo/221923243/m%3D1080_k%3D1_a%3D1/v2?client_application_id=41313&webp=true&sig=fdf67062861ba9cca253a69e2fddc11ed8c1b0f096473ddc172658f589f27f2b",
+        //     "format": "jpeg"
+        //   }],
+        //   "url": "/photo/221923243/train-by-marcin-oscenda",
+        //   "positive_votes_count": 17,
+        //   "converted_bits": 0,
+        //   "watermark": false,
+        //   "image_format": "jpeg",
+        //   "licensing_requested": false,
+        //   "licensing_suggested": false,
+        //   "is_free_photo": false,
+        //   "user": {
+        //     "id": 15839399,
+        //     "username": "MarcinOscenda",
+        //     "firstname": "Marcin",
+        //     "lastname": "Oscenda",
+        //     "city": "Wrocław",
+        //     "country": "Poland",
+        //     "usertype": 0,
+        //     "fullname": "Marcin Oscenda",
+        //     "userpic_url": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/1.jpg?2",
+        //     "userpic_https_url": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/1.jpg?2",
+        //     "cover_url": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/cover_2048.jpg?6",
+        //     "upgrade_status": 0,
+        //     "store_on": true,
+        //     "affection": 2685,
+        //     "avatars": {
+        //         "default": {
+        //             "https": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/1.jpg?2"
+        //         },
+        //         "large": {
+        //             "https": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/2.jpg?2"
+        //         },
+        //         "small": {
+        //             "https": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/3.jpg?2"
+        //         },
+        //         "tiny": {
+        //             "https": "https://pacdn.500px.org/15839399/201f671404a3eb3e97db65908724d89f92b4bcb5/4.jpg?2"
+        //         }
+        //     },
+        //     "followers_count": 19
+        //   }
+        // };
+      }
+    }
+
+    window.customElements.define(ImageDetailsFragment.is, ImageDetailsFragment);
+  </script>
+</dom-module>
