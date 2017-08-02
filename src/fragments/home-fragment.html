@@ -1,4 +1,3 @@
-<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../core/services/five-hundred-px-service.html">
 <link rel="import" href="../core/storages/five-hundred-px-storage.html">
@@ -20,7 +19,7 @@
   </template>
 
   <script>
-    class HomeFragment extends Polymer.GestureEventListeners(Polymer.Element) {
+    class HomeFragment extends Polymer.Element {
       static get is() {
         return 'home-fragment';
       }
@@ -40,11 +39,13 @@
       ready() {
         super.ready();
 
-        Polymer.Gestures.addListener(this, 'tap', (event) => {
-          if (event.composedPath()[2].nodeName.toLowerCase() != 'image-list-item-view') return;
+        this.addEventListener('click', (event) => {
+          const composedPath = event.composedPath();
 
-          const itemView = event.composedPath()[2];
-          const listView = event.composedPath()[4];
+          if (composedPath[2].nodeName.toLowerCase() != 'image-list-item-view') return;
+
+          const itemView = composedPath[2];
+          const listView = composedPath[4];
           const listRepeat = listView.$.repeat;
           const imageData = listRepeat.itemForElement(itemView);
 
