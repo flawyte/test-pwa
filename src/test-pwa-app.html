@@ -145,5 +145,16 @@
     }
 
     window.customElements.define(TestPwaApp.is, TestPwaApp);
+
+    window.addEventListener('beforeinstallprompt', e => {
+      if (localStorage.getItem('showed-install-banner')) {
+        e.preventDefault();
+        return;
+      }
+
+      e.userChoice.then(choice => {
+        localStorage.setItem('showed-install-banner', true);
+      });
+    });
   </script>
 </dom-module>
