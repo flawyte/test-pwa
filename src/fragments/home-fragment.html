@@ -1,3 +1,4 @@
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../core/services/five-hundred-px-service.html">
 <link rel="import" href="../core/storages/five-hundred-px-storage.html">
@@ -19,7 +20,7 @@
   </template>
 
   <script>
-    class HomeFragment extends Polymer.Element {
+    class HomeFragment extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() {
         return 'home-fragment';
       }
@@ -32,7 +33,22 @@
         console.log('onVisible()');
 
         this.$.service.fetch().then(photos => {
-          this.$.storage.items = photos.map(item => item.image_url);
+          this.$.storage.items = photos;
+        });
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.Gestures.addListener(this, 'tap', (event) => {
+          if (event.composedPath()[2].nodeName.toLowerCase() != 'image-list-item-view') return;
+
+          const itemView = event.composedPath()[2];
+          const listView = event.composedPath()[4];
+          const listRepeat = listView.$.repeat;
+          const imageData = listRepeat.itemForElement(itemView);
+
+          this.frame.setVisibleFragmentById('details', imageData);
         });
       }
     }

@@ -15,8 +15,8 @@
       }
     </style>
 
-    <template is="dom-repeat" items="[[items]]">
-      <image-list-item-view image-url="[[item]]"></image-list-item-view>
+    <template id="repeat" is="dom-repeat" items="[[items]]">
+      <image-list-item-view image-url="[[item.image_url]]"></image-list-item-view>
     </template>
   </template>
 

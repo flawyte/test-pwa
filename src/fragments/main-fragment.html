@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../fragments/home-fragment.html">
+<link rel="import" href="../fragments/image-details-fragment.html">
 <link rel="import" href="../views/fragments/main-view.html">
 
 <dom-module id="main-fragment">
@@ -14,6 +15,7 @@
 
     <main-view>
       <home-fragment id="home"></home-fragment>
+      <image-details-fragment id="details"></image-details-fragment>
     </main-view>
   </template>
 
@@ -31,7 +33,8 @@
 
       initFragments() {
         this.fragments = [
-          this.$.home
+          this.$.details,
+          this.$.home,
         ];
 
         this.fragments.forEach(item => {
@@ -54,7 +57,7 @@
         this.initFragments();
       }
 
-      setVisibleFragment(fragment) {
+      setVisibleFragment(fragment, data) {
         if (this.visibleFragments.indexOf(fragment) !== -1) return;
 
         this.visibleFragments.forEach(item => {
@@ -64,11 +67,16 @@
 
         fragment.style.display = '';
         (typeof fragment.onVisible === 'function') && fragment.onVisible();
+        (typeof fragment.onData === 'function') && fragment.onData(data);
         this.visibleFragments = [fragment];
       }
 
-      setVisibleFragmentByTag(tag) {
-        this.setVisibleFragment(this.shadowRoot.querySelector(tag));
+      setVisibleFragmentById(id, data) {
+        this.setVisibleFragment(this.$[id], data);
+      }
+
+      setVisibleFragmentByTag(tag, data) {
+        this.setVisibleFragment(this.shadowRoot.querySelector(tag), data);
       }
     }
 
