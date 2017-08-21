@@ -24,13 +24,7 @@
         return 'home-fragment';
       }
 
-      onInvisible() {
-        console.log('onInvisible()');
-      }
-
       onVisible() {
-        console.log('onVisible()');
-
         this.$.service.fetch().then(photos => {
           this.$.storage.items = photos;
         });
