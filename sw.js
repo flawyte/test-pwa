@@ -75,6 +75,14 @@ const fileManifest = [
     "revision": "1da38888481edb36a5d7f15a8633dd9f"
   },
   {
+    "url": "bower_components/app-route/app-location.html",
+    "revision": "8fd3320544adb5e25f032dc9ca593d45"
+  },
+  {
+    "url": "bower_components/app-route/app-route-converter-behavior.html",
+    "revision": "717082ae29ce5616531c20e1ddc20d3c"
+  },
+  {
     "url": "bower_components/font-roboto/roboto.html",
     "revision": "22fe760d42278ca3b2b3718390fbb1bd"
   },
@@ -113,6 +121,14 @@ const fileManifest = [
   {
     "url": "bower_components/iron-iconset-svg/iron-iconset-svg.html",
     "revision": "5cc50c1115e3a7691ffb98ee8a50ab0f"
+  },
+  {
+    "url": "bower_components/iron-location/iron-location.html",
+    "revision": "a53d089df7c2f93417675531e89dc266"
+  },
+  {
+    "url": "bower_components/iron-location/iron-query-params.html",
+    "revision": "922a11c879f369d19d79005b4cb4fabf"
   },
   {
     "url": "bower_components/iron-meta/iron-meta.html",
@@ -400,7 +416,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "67172fa613b869891284b987877779df"
+    "revision": "c85afc1acd8715a9857e75b8b2666168"
   },
   {
     "url": "manifest.json",
@@ -420,23 +436,23 @@ const fileManifest = [
   },
   {
     "url": "src/core/storages/five-hundred-px-storage.html",
-    "revision": "f77c418dcfac95b89f564ff988e6404c"
+    "revision": "e95264f5192222479f114ee016ff3241"
   },
   {
     "url": "src/fragments/home-fragment.html",
-    "revision": "94d2137374fb1bc83081ce3bc7517c38"
+    "revision": "9770829f5321911fc4764137723f044d"
   },
   {
     "url": "src/fragments/image-details-fragment.html",
-    "revision": "3028bff8f38b215b1e4fbe641df0403a"
+    "revision": "8a5b1c258d4d651e13b1e4f7fe193e81"
   },
   {
     "url": "src/fragments/main-fragment.html",
-    "revision": "8daab01079d903a4443cbc52ea5a7ea5"
+    "revision": "41c55b3361cd1c38865810c989aa4813"
   },
   {
     "url": "src/fragments/splash-fragment.html",
-    "revision": "20f0b3a8c1497a2ff359df734963acd2"
+    "revision": "29e246a99975611e39a5fe25c0d233be"
   },
   {
     "url": "src/test-pwa-app.html",
@@ -448,7 +464,7 @@ const fileManifest = [
   },
   {
     "url": "src/views/fragments/image-details-view.html",
-    "revision": "d6e64b6c331630452f58347b51320d5c"
+    "revision": "990673e191e4189621dd50b27855e5cd"
   },
   {
     "url": "src/views/fragments/main-view.html",
