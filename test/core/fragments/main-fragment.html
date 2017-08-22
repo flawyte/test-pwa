@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>main-fragment test</title>
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="/bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="/src/fragments/main-fragment.html">
+  </head>
+  <body>
+
+    <test-fixture id="default">
+      <template>
+        <main-fragment></main-fragment>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('_dataFromPath()', function() {
+        test('returns expected object', function() {
+          var el = fixture('default');
+
+          assert.deepEqual(
+            el._dataFromPath('photos/123456', 'photos/([0-9]+):id'),
+            {id: '123456'}
+          );
+          // assert.deepEqual(
+          //   el._dataFromPath('products/123/reviews', 'products/([0-9]+):id/(\w+):subpath'),
+          //   {id: '123456', subpath: 'reviews'}
+          // );
+        });
+
+        test('returns null', function() {
+          var el = fixture('default');
+
+          assert.equal(el._dataFromPath('', ''), null);
+        });
+      });
+
+      suite('_extractParamsFromRoute()', function() {
+        test('returns expected array', function() {
+          var el = fixture('default');
+
+          assert.deepEqual(
+            el._extractParamsFromRoute('home'),
+            []
+          );
+          assert.deepEqual(
+            el._extractParamsFromRoute('photos/([0-9]+):id'),
+            ['([0-9]+):id']
+          );
+          // assert.deepEqual(
+          //   el._extractParamsFromRoute('products/([0-9]+):one/([a-Z]+):two'),
+          //   ['([0-9]+):one', '([a-Z]+):two']
+          // );
+        });
+      });
+
+      suite('_pathToFragment()', function() {
+        test('returns expected element', function() {
+          var el = fixture('default');
+
+          assert.equal(
+            el._pathToFragment('/').id,
+            'home'
+          );
+          assert.equal(
+            el._pathToFragment('/photos/123456').id,
+            'details'
+          );
+        });
+      });
+    </script>
+
+  </body>
+</html>

@@ -43,7 +43,7 @@
           const listRepeat = listView.$.repeat;
           const imageData = listRepeat.itemForElement(itemView);
 
-          this.frame.setVisibleFragmentById('details', imageData);
+          this.frame.setPath('photos/' + imageData.id);
         });
       }
     }

@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../core/storages/five-hundred-px-storage.html">
 <link rel="import" href="../views/fragments/image-details-view.html">
 
 <dom-module id="image-details-fragment">
@@ -11,6 +12,7 @@
       }
     </style>
 
+    <five-hundred-px-storage id="storage"></five-hundred-px-storage>
     <image-details-view id="view"></image-details-view>
   </template>
 
@@ -21,7 +23,7 @@
       }
 
       onData(data) {
-        this.$.view.image = data;
+        this.$.view.image = this.$.storage.findById(data.id);
       }
 
       onVisible() {
@@ -42,7 +44,7 @@
             : composedPath[2];
 
           if (item.id == 'back')
-            this.frame.setVisibleFragmentById('home');
+            this.frame.setPath('');
         });
       }
     }

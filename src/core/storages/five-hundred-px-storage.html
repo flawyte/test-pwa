@@ -2,21 +2,45 @@
 
 <dom-module id="five-hundred-px-storage">
   <script>
-    class FiveHundredPxStorage extends Polymer.Element {
-      static get is() {
-        return 'five-hundred-px-storage';
+    {
+      const _instances = [];
+
+      const registerInstance = i => {
+        _instances.push(i);
       }
 
-      static get properties() {
-        return {
-          items: {
-            notify: true,
-            type: Array
-          }
-        };
+      class FiveHundredPxStorage extends Polymer.Element {
+        static get is() {
+          return 'five-hundred-px-storage';
+        }
+
+        static get properties() {
+          return {
+            items: {
+              notify: true,
+              observer: '_itemsChanged',
+              type: Array
+            }
+          };
+        }
+
+        _itemsChanged(newValue) {
+          _instances.forEach(instance => {
+            instance.items = newValue;
+          });
+        }
+
+        constructor() {
+          super();
+          registerInstance(this);
+        }
+
+        findById(id) {
+          return this.items.find(item => item.id == id);
+        }
       }
+
+      window.customElements.define(FiveHundredPxStorage.is, FiveHundredPxStorage);
     }
-
-    window.customElements.define(FiveHundredPxStorage.is, FiveHundredPxStorage);
   </script>
 </dom-module>

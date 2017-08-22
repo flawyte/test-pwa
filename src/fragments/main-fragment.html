@@ -1,3 +1,4 @@
+<link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../fragments/home-fragment.html">
 <link rel="import" href="../fragments/image-details-fragment.html">
@@ -14,9 +15,11 @@
     </style>
 
     <main-view>
-      <home-fragment id="home"></home-fragment>
-      <image-details-fragment id="details"></image-details-fragment>
+      <home-fragment id="home" data-route="/"></home-fragment>
+      <image-details-fragment id="details" data-route="/photos/([0-9]+):id"></image-details-fragment>
     </main-view>
+
+    <app-location id="location" on-route-changed="_onRouteChanged"></app-location>
   </template>
 
   <script>
@@ -25,9 +28,56 @@
         return 'main-fragment';
       }
 
+      _dataFromPath(path, route) {
+        let params = this._extractParamsFromRoute(route);
+        if (params.length == 0) return null;
+
+        let data = {};
+
+        for (let i = 0; i < params.length; i++) {
+          const param = params[i];
+          const name = param.split(':')[1];
+          const regex = param.split(':')[0];
+          const value = path.match(new RegExp(route.replace(`${param}`, `(${regex})`)))[1];
+
+          data[name] = value;
+        }
+
+        return data;
+      }
+
+      _extractParamsFromRoute(route) {
+        let params = route.match(/(\(.*\):[a-zA-Z]+)\/?/);
+
+        if (!params) return [];
+
+        return params.slice(1);
+      }
+
+      _onRouteChanged(e) {
+        if (!this.ignoreNextRouteChange) {
+          this.setPath(this.$.location.path);
+        }
+
+        this.ignoreNextRouteChange = false;
+      }
+
+      _pathToFragment(path) {
+        const fragment = this.fragments.find(frag => {
+          const route = frag.dataset.route;
+          const regex = route.replace(/:\w+/, '');
+          const match = new RegExp('^'+regex+'$').test(path);
+
+          return match;
+        });
+
+        return fragment || null;
+      }
+
       constructor() {
         super();
         this.fragments = [];
+        this.ignoreNextRouteChange = true;
         this.visibleFragments = [];
       }
 
@@ -43,13 +93,8 @@
         });
       }
 
-      onInvisible() {
-        console.log('onInvisible()');
-      }
-
       onVisible() {
-        console.log('onVisible()');
-        this.setVisibleFragment(this.$.home);
+        this.setPath('/');
       }
 
       ready() {
@@ -57,8 +102,28 @@
         this.initFragments();
       }
 
+      setPath(path) {
+        if (!path.startsWith('/'))
+          path = '/' + path;
+
+        const fragment = this._pathToFragment(path);
+        const data = this._dataFromPath(path, fragment.dataset.route);
+
+        this.setVisibleFragment(fragment, data);
+
+        if (path != this.$.location.path) {
+          this.ignoreNextRouteChange = true;
+          this.$.location.path = path;
+        }
+      }
+
       setVisibleFragment(fragment, data) {
-        if (this.visibleFragments.indexOf(fragment) !== -1) return;
+        // If fragment is already visible
+        if (this.visibleFragments.indexOf(fragment) !== -1) {
+          // Just pass it new data and return
+          (typeof fragment.onData === 'function') && fragment.onData(data);
+          return;
+        }
 
         this.visibleFragments.forEach(item => {
           item.style.display = 'none';
@@ -69,14 +134,6 @@
         (typeof fragment.onVisible === 'function') && fragment.onVisible();
         (typeof fragment.onData === 'function') && fragment.onData(data);
         this.visibleFragments = [fragment];
-      }
-
-      setVisibleFragmentById(id, data) {
-        this.setVisibleFragment(this.$[id], data);
-      }
-
-      setVisibleFragmentByTag(tag, data) {
-        this.setVisibleFragment(this.shadowRoot.querySelector(tag), data);
       }
     }
 
