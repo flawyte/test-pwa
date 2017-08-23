@@ -420,7 +420,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "87682762d7ea909a0892d496eda626c8"
+    "revision": "ce5fb9360f603739b835653c671694e2"
   },
   {
     "url": "manifest.json",
@@ -432,7 +432,7 @@ const fileManifest = [
   },
   {
     "url": "src/core/services/five-hundred-px-service.html",
-    "revision": "a5f147755ad85f962c411d414f9acf5d"
+    "revision": "ed750a6914f5a30b7ccc1bc5b8f58cff"
   },
   {
     "url": "src/core/services/five-hundred-px-service.js",
@@ -444,7 +444,7 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/home-fragment.html",
-    "revision": "9770829f5321911fc4764137723f044d"
+    "revision": "e6641c81179de88f7c81f5004151893d"
   },
   {
     "url": "src/fragments/image-details-fragment.html",
@@ -452,15 +452,15 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/main-fragment.html",
-    "revision": "6e8c7a27ee4e42f80786b2a1c733f4dc"
+    "revision": "581dd530d033366c0a7fb2e20df98c7b"
   },
   {
     "url": "src/fragments/splash-fragment.html",
-    "revision": "29e246a99975611e39a5fe25c0d233be"
+    "revision": "b53fa82a44e799d36055b6793a116d38"
   },
   {
     "url": "src/test-pwa-app.html",
-    "revision": "aa94406da19e451edecdeb60ee10f863"
+    "revision": "6955b4ee44e0cf3af1466dcd58110d1a"
   },
   {
     "url": "src/views/fragments/home-view.html",
