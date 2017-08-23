@@ -65,11 +65,11 @@
           var el = fixture('default');
 
           assert.equal(
-            el._pathToFragment('/').id,
+            el._pathToFragment('').id,
             'home'
           );
           assert.equal(
-            el._pathToFragment('/photos/123456').id,
+            el._pathToFragment('photos/123456').id,
             'details'
           );
         });
