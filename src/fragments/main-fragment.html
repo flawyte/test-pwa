@@ -15,8 +15,8 @@
     </style>
 
     <main-view>
-      <home-fragment id="home" data-route="/"></home-fragment>
-      <image-details-fragment id="details" data-route="/photos/([0-9]+):id"></image-details-fragment>
+      <home-fragment id="home" data-route=""></home-fragment>
+      <image-details-fragment id="details" data-route="photos/([0-9]+):id"></image-details-fragment>
     </main-view>
 
     <app-location id="location" on-route-changed="_onRouteChanged"></app-location>
@@ -26,6 +26,14 @@
     class MainFragment extends Polymer.Element {
       static get is() {
         return 'main-fragment';
+      }
+
+      static get properties() {
+        return {
+          basePath: {
+            type: String
+          }
+        };
       }
 
       _dataFromPath(path, route) {
@@ -56,7 +64,7 @@
 
       _onRouteChanged(e) {
         if (!this.ignoreNextRouteChange) {
-          this.setPath(this.$.location.path);
+          this.setPath(this.$.location.path.slice(this.basePath.length));
         }
 
         this.ignoreNextRouteChange = false;
@@ -94,7 +102,7 @@
       }
 
       onVisible() {
-        this.setPath('/');
+        this.setPath('');
       }
 
       ready() {
@@ -103,14 +111,12 @@
       }
 
       setPath(path) {
-        if (!path.startsWith('/'))
-          path = '/' + path;
-
         const fragment = this._pathToFragment(path);
         const data = this._dataFromPath(path, fragment.dataset.route);
 
         this.setVisibleFragment(fragment, data);
 
+        path = this.basePath + path;
         if (path != this.$.location.path) {
           this.ignoreNextRouteChange = true;
           this.$.location.path = path;
