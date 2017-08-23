@@ -14,7 +14,7 @@
       }
     </style>
 
-    <main-view>
+    <main-view id="view">
       <home-fragment id="home" data-route=""></home-fragment>
       <image-details-fragment id="details" data-route="photos/([0-9]+):id"></image-details-fragment>
     </main-view>
@@ -37,10 +37,10 @@
       }
 
       _dataFromPath(path, route) {
-        let params = this._extractParamsFromRoute(route);
+        const params = this._extractParamsFromRoute(route);
         if (params.length == 0) return null;
 
-        let data = {};
+        const data = {};
 
         for (let i = 0; i < params.length; i++) {
           const param = params[i];
@@ -55,11 +55,20 @@
       }
 
       _extractParamsFromRoute(route) {
-        let params = route.match(/(\(.*\):[a-zA-Z]+)\/?/);
+        const params = route.match(/(\(.*\):[a-zA-Z]+)\/?/);
 
         if (!params) return [];
 
         return params.slice(1);
+      }
+
+      _initFragments(fragments) {
+        this.fragments = fragments;
+
+        this.fragments.forEach(item => {
+          item.frame = this;
+          item.style.display = 'none';
+        });
       }
 
       _onRouteChanged(e) {
@@ -89,25 +98,13 @@
         this.visibleFragments = [];
       }
 
-      initFragments() {
-        this.fragments = [
-          this.$.details,
-          this.$.home,
-        ];
-
-        this.fragments.forEach(item => {
-          item.frame = this;
-          item.style.display = 'none';
-        });
-      }
-
       onVisible() {
         this.setPath('');
       }
 
       ready() {
         super.ready();
-        this.initFragments();
+        this._initFragments(Array.prototype.slice.call(this.$.view.children));
       }
 
       setPath(path) {
