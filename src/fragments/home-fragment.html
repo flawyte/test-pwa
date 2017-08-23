@@ -14,7 +14,7 @@
     </style>
 
     <five-hundred-px-service id="service"></five-hundred-px-service>
-    <five-hundred-px-storage id="storage" items="{{items}}"></five-hundred-px-storage>
+    <five-hundred-px-storage items="{{items}}"></five-hundred-px-storage>
     <home-view id="view" images="[[items]]"></home-view>
   </template>
 
@@ -25,9 +25,7 @@
       }
 
       onVisible() {
-        this.$.service.fetch().then(photos => {
-          this.$.storage.items = photos;
-        });
+        this.$.service.fetch();
       }
 
       ready() {
