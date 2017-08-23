@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../core/services/five-hundred-px-service.html">
 <link rel="import" href="../views/fragments/splash-view.html">
 
 <dom-module id="splash-fragment">
@@ -11,6 +12,7 @@
       }
     </style>
 
+    <five-hundred-px-service id="service"></five-hundred-px-service>
     <splash-view></splash-view>
   </template>
 
@@ -22,10 +24,7 @@
 
       ready() {
         super.ready();
-
-        Polymer.RenderStatus.afterNextRender(this, () => {
-          setTimeout(() => this.frame.setVisibleFragmentByTag('main-fragment'), 1000);
-        });
+        this.$.service.fetch().then(() => this.frame.setVisibleFragmentByTag('main-fragment'));
       }
     }
 
