@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      // This little piece of code ensures that app dependencies are always loaded from the app's root path whatever URL they're loaded from (will be a subpath if the user changes the URL manually)
+
+      if (!localStorage.getItem('app-path'))
+        localStorage.setItem('app-path', location.pathname);
+
+      (function() {
+        var base = document.createElement('base');
+        base.href = localStorage.getItem('app-path');
+        console.log(base);
+        document.head.insertBefore(base, document.head.firstChild);
+      })();
+    </script>
+
     <meta charset="utf-8">
     <meta name="description" content="Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.">
     <meta name="theme-color" content="#0D47A1">

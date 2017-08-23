@@ -67,7 +67,7 @@
           this.$.splashFragment
         ];
 
-        this.$.mainFragment.basePath = window.location.pathname;
+        this.$.mainFragment.basePath = localStorage.getItem('app-path');
 
         this.fragments.forEach(item => {
           item.frame = this;

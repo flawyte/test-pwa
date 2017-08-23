@@ -99,7 +99,7 @@
       }
 
       onVisible() {
-        this.setPath('');
+        this.setPath(this.$.location.path.slice(this.basePath.length));
       }
 
       ready() {
