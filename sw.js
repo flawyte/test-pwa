@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v1.1.0.js');
+importScripts('workbox-sw.prod.v1.3.0.js');
 
 /**
  * DO NOT EDIT THE FILE MANIFEST ENTRY
@@ -216,19 +216,19 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/elements/array-selector.html",
-    "revision": "fe98ef26af1d3c0203f860abe33c7ea3"
+    "revision": "0a5b57cbed99597d83d565b145f3d56d"
   },
   {
     "url": "bower_components/polymer/lib/elements/custom-style.html",
-    "revision": "b246cd8d5813053a40e5babd9afdcd90"
+    "revision": "b7ed27dbaf1bfc1dfc7f0be67c39ed7b"
   },
   {
     "url": "bower_components/polymer/lib/elements/dom-bind.html",
-    "revision": "f3e83e5cc726f3669e23ee66d3636b07"
+    "revision": "ef67a23e234c9741ec21f0ae1097fdf1"
   },
   {
     "url": "bower_components/polymer/lib/elements/dom-if.html",
-    "revision": "de86afbdc9f052599c600f668ddfc2f8"
+    "revision": "cae150b06e37f393cf1e13235f488106"
   },
   {
     "url": "bower_components/polymer/lib/elements/dom-module.html",
@@ -236,19 +236,19 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/elements/dom-repeat.html",
-    "revision": "aa4ff8fa7c736931c2d523c58836f4d9"
+    "revision": "e234cd8dc78ced43daa74944c6be2e36"
   },
   {
     "url": "bower_components/polymer/lib/legacy/class.html",
-    "revision": "52bb09aa0d90279638bc558a0183a1d7"
+    "revision": "4130ea8323cd956939b34d45c8d474e5"
   },
   {
     "url": "bower_components/polymer/lib/legacy/legacy-element-mixin.html",
-    "revision": "2083539ce63abf615f97e22af769c459"
+    "revision": "e79012b9a088b58b9e6505d1f632c908"
   },
   {
     "url": "bower_components/polymer/lib/legacy/mutable-data-behavior.html",
-    "revision": "a03f5783244490e022bfdee9bc36c1d8"
+    "revision": "4e6193b3f56c4b8fce013226782cbd9e"
   },
   {
     "url": "bower_components/polymer/lib/legacy/polymer-fn.html",
@@ -256,39 +256,39 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/legacy/polymer.dom.html",
-    "revision": "40839739ebfc3eb5282a7e8ac9c4dbaf"
+    "revision": "966e6a1374a512cf82e212d285ad383b"
   },
   {
     "url": "bower_components/polymer/lib/legacy/templatizer-behavior.html",
-    "revision": "b68221cfeaa232f815aa9eac5d307d22"
+    "revision": "a5dbf7ba1732709e555cbc6d55210437"
   },
   {
     "url": "bower_components/polymer/lib/mixins/element-mixin.html",
-    "revision": "6f9531c70890734c8a69a62b37254bde"
+    "revision": "1a60a52938a1a00e374a84d145150fa6"
   },
   {
     "url": "bower_components/polymer/lib/mixins/gesture-event-listeners.html",
-    "revision": "46d469e21135419c27cb129e0cbcfe2e"
+    "revision": "45976f766c422ccfe81f843f86bd1186"
   },
   {
     "url": "bower_components/polymer/lib/mixins/mutable-data.html",
-    "revision": "1ee8caa2078cd3302f7ceb8f169dc283"
+    "revision": "7a6c3a69b47bd0c8224d9d17c40a6c1d"
   },
   {
     "url": "bower_components/polymer/lib/mixins/property-accessors.html",
-    "revision": "cd90c8922c882b362f184d57f21f03b8"
+    "revision": "7b8161e60dc8557c24ac9cad3be8b3ad"
   },
   {
     "url": "bower_components/polymer/lib/mixins/property-effects.html",
-    "revision": "c9b6bf09486a42db58770cf87905c815"
+    "revision": "3e16adbcc443158f8393ae7924f51ae0"
   },
   {
     "url": "bower_components/polymer/lib/mixins/template-stamp.html",
-    "revision": "e1a1ff3fc2300ef7a072bae1c15c1ec4"
+    "revision": "9d2b01907b95e9ac06536c496d8925f3"
   },
   {
     "url": "bower_components/polymer/lib/utils/array-splice.html",
-    "revision": "9c1a8201554264f7ab03047243aa008e"
+    "revision": "6f44297ff952e3c34b2bada5dcd04da7"
   },
   {
     "url": "bower_components/polymer/lib/utils/async.html",
@@ -308,7 +308,7 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/utils/flattened-nodes-observer.html",
-    "revision": "082952a0812b3387e8a40710c05987bd"
+    "revision": "4253023747057133d1def0f068535270"
   },
   {
     "url": "bower_components/polymer/lib/utils/flush.html",
@@ -316,7 +316,7 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/utils/gestures.html",
-    "revision": "a932c0518514a2f405087c3fbc69f126"
+    "revision": "ee33c249c1a2f47b1bc587e058c601dc"
   },
   {
     "url": "bower_components/polymer/lib/utils/import-href.html",
@@ -324,7 +324,7 @@ const fileManifest = [
   },
   {
     "url": "bower_components/polymer/lib/utils/mixin.html",
-    "revision": "0e4ba1a810f7c2d5df89f7c41f2ffb86"
+    "revision": "5bccee39c3ba7d9c298c9276ab7525ae"
   },
   {
     "url": "bower_components/polymer/lib/utils/path.html",
@@ -339,12 +339,16 @@ const fileManifest = [
     "revision": "dfc0c7635dbb36cb322720ca162c05ec"
   },
   {
+    "url": "bower_components/polymer/lib/utils/settings.html",
+    "revision": "b21de5bb0358e46b2fea01cf630d546d"
+  },
+  {
     "url": "bower_components/polymer/lib/utils/style-gather.html",
-    "revision": "b60d81b7ee3a04c859f1bdd2c77b0268"
+    "revision": "4318883977b8dc3d54943ab684f7b07d"
   },
   {
     "url": "bower_components/polymer/lib/utils/templatize.html",
-    "revision": "2fc4924f6cf459f95516819dbc8033ea"
+    "revision": "64fa57b74668391410193ac808fd5e37"
   },
   {
     "url": "bower_components/polymer/lib/utils/unresolved.html",
@@ -364,7 +368,7 @@ const fileManifest = [
   },
   {
     "url": "bower_components/shadycss/apply-shim.min.js",
-    "revision": "985834a8133da3bf5ef839002604a080"
+    "revision": "9f39cc45650d2451abc67d68e3c8c6ab"
   },
   {
     "url": "bower_components/shadycss/custom-style-interface.html",
@@ -372,31 +376,31 @@ const fileManifest = [
   },
   {
     "url": "bower_components/shadycss/custom-style-interface.min.js",
-    "revision": "eb89d3862a054d45bdd7c0a009f0a98c"
+    "revision": "db44b0812974ca753a10f8f6d1c4b00c"
   },
   {
     "url": "bower_components/webcomponentsjs/custom-elements-es5-adapter.js",
-    "revision": "e6324a1b9a6f7dbac892a472464088db"
+    "revision": "a5043c1d0dd16d84558ee6cc2276212e"
   },
   {
     "url": "bower_components/webcomponentsjs/gulpfile.js",
-    "revision": "5b9593e6c3a2a87a866c1169114c745e"
+    "revision": "0366da1f0f7858c9af2daa3ef7d950ea"
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-hi-ce.js",
-    "revision": "495de81020abfefd4f0e3dcff6b7fd3e"
+    "revision": "693cc93e568a42e99bee3dfa01dc3881"
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js",
-    "revision": "68bc22bcb5543e6caabd1d66dc9e1ca9"
+    "revision": "346b8a62f169868c3f4ac7db595332f6"
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-hi.js",
-    "revision": "0ac538bae69f6beb629d2357350041e7"
+    "revision": "b88ce284fda849097ab4997d97bfc8b6"
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-lite.js",
-    "revision": "c89f66cb63a098895f4b1b42eb371673"
+    "revision": "f6745faefd8ab7d11e2a09d0c3056dcc"
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js",
@@ -404,7 +408,7 @@ const fileManifest = [
   },
   {
     "url": "bower_components/webcomponentsjs/webcomponents-sd-ce.js",
-    "revision": "c5f6fe397db634cde89f66c2f1bc2f62"
+    "revision": "bda09b071f146e34a724904becca270e"
   },
   {
     "url": "images/icon-256px.png",
@@ -481,6 +485,10 @@ const fileManifest = [
   {
     "url": "src/views/image-list-view.html",
     "revision": "bae9039d6e11e5e065aecc2b20b1f7f1"
+  },
+  {
+    "url": "workbox-sw.prod.v1.3.0.js.map",
+    "revision": "f7ef2d1eb0b250ec46d79e81e9a3d0df"
   }
 ];
 
