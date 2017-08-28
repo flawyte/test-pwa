@@ -25,10 +25,6 @@
       onVisible() {
         this.$.service.fetch().then(() => this.container.setVisibleFragmentByTag('main-fragment'));
       }
-
-      ready() {
-        super.ready();
-      }
     }
 
     window.customElements.define(SplashFragment.is, SplashFragment);

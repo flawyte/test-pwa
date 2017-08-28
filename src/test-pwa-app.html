@@ -44,8 +44,7 @@
       </div>
       <div>
         <main-fragment id="main"
-          class="fragment"
-          path="{{path}}"></main-fragment>
+          class="fragment"></main-fragment>
       </div>
     </div>
 
@@ -72,6 +71,13 @@
         super.ready();
         this._setUpFragments(Array.prototype.slice.call(this.shadowRoot.querySelectorAll('.fragment')));
         this.setVisibleFragmentByTag('splash-fragment');
+
+        this.$.location.addEventListener('path-changed', (event) => {
+          this.$.main.path = event.detail.value;
+        });
+        this.$.main.addEventListener('path-changed', (event) => {
+          this.$.location.path = event.detail.value;
+        });
 
         if (navigator.serviceWorker)
           this.registerServiceWorker();
@@ -120,12 +126,18 @@
         });
       }
 
+      setVisibleFragment(fragment) {
+        super.setVisibleFragment(fragment);
+        fragment.path = this.path;
+      }
+
       _onToastPositiveButtonTapped() {
         window.location.reload(true);
       }
 
       get useHashAsPath() {
-        return window.location.origin.indexOf('flawyte.github.io') > -1;
+        // return window.location.origin.indexOf('flawyte.github.io') > -1;
+        return true;
       }
 
       __pathChanged(path) {
