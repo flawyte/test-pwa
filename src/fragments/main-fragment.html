@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../views/fragments/main-view.html">
+<link rel="import" href="../views/page404-view.html">
 <link rel="import" href="../app-fragment.html">
 <link rel="import" href="home-fragment.html">
 <link rel="import" href="image-details-fragment.html">
@@ -19,6 +20,8 @@
         data-route="^/$"></home-fragment>
       <image-details-fragment id="details"
         data-route="^/photos/([0-9]+):imageId$"></image-details-fragment>
+      <page404-view
+        data-route=".*"></page404-view>
     </main-view>
   </template>
 
