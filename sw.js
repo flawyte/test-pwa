@@ -420,11 +420,15 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "ce5fb9360f603739b835653c671694e2"
+    "revision": "f74a25d4fd565f0d945447c7ea540d42"
   },
   {
     "url": "manifest.json",
     "revision": "a592faf973bd12d3a4e4f2fdaa7fced8"
+  },
+  {
+    "url": "src/app-fragment.html",
+    "revision": "6c982d01488ebee3ca1d71bb55023efa"
   },
   {
     "url": "src/core/services/five-hundred-px-service-worker.js",
@@ -432,7 +436,7 @@ const fileManifest = [
   },
   {
     "url": "src/core/services/five-hundred-px-service.html",
-    "revision": "ed750a6914f5a30b7ccc1bc5b8f58cff"
+    "revision": "f9ceb069ad4b7d3074b92e7db557784b"
   },
   {
     "url": "src/core/services/five-hundred-px-service.js",
@@ -444,23 +448,31 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/home-fragment.html",
-    "revision": "e6641c81179de88f7c81f5004151893d"
+    "revision": "92b7ab25f994b1117b32fc5b835018b6"
   },
   {
     "url": "src/fragments/image-details-fragment.html",
-    "revision": "8a5b1c258d4d651e13b1e4f7fe193e81"
+    "revision": "b26c951d093856a4fd48a02a92032f36"
   },
   {
     "url": "src/fragments/main-fragment.html",
-    "revision": "d5732cc863923331650c7eb4a9276d21"
+    "revision": "1c220fb9e6416076de16cc382b065ea1"
   },
   {
     "url": "src/fragments/splash-fragment.html",
-    "revision": "b53fa82a44e799d36055b6793a116d38"
+    "revision": "fa98b882a7b1e360b09b54a98cd41c7b"
+  },
+  {
+    "url": "src/router.html",
+    "revision": "cbff93d9a0d1df95d9e0d6c7d837493c"
+  },
+  {
+    "url": "src/single-fragment-container.html",
+    "revision": "808cffa7302c8c3f1be944093103eace"
   },
   {
     "url": "src/test-pwa-app.html",
-    "revision": "6955b4ee44e0cf3af1466dcd58110d1a"
+    "revision": "6c36afa90b410fcb78ab5f455c58e44c"
   },
   {
     "url": "src/views/fragments/home-view.html",
@@ -485,6 +497,10 @@ const fileManifest = [
   {
     "url": "src/views/image-list-view.html",
     "revision": "bae9039d6e11e5e065aecc2b20b1f7f1"
+  },
+  {
+    "url": "src/views/page404-view.html",
+    "revision": "873a29aac6c290f895d37ccf54693ea8"
   },
   {
     "url": "workbox-sw.prod.v1.3.0.js.map",
