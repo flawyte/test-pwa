@@ -1,0 +1,30 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="wallpapers-fragment">
+  <template>
+    <style>
+      :host {
+        background: #dddddd;
+        display: block;
+      }
+    </style>
+
+    <h2>wallpapers-fragment</h2>
+
+    <button on-click="__backToRoot">BACK to '/'</button>
+  </template>
+
+  <script>
+    class WallpapersFragment extends Polymer.Element {
+      static get is() {
+        return 'wallpapers-fragment';
+      }
+
+      __backToRoot() {
+        this.container.path = '/';
+      }
+    }
+
+    window.customElements.define(WallpapersFragment.is, WallpapersFragment);
+  </script>
+</dom-module>

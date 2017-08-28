@@ -15,7 +15,7 @@
 
     <five-hundred-px-service id="service"></five-hundred-px-service>
     <five-hundred-px-storage items="{{items}}"></five-hundred-px-storage>
-    <home-view id="view" images="[[items]]"></home-view>
+    <home-view images="[[items]]"></home-view>
   </template>
 
   <script>
@@ -41,7 +41,7 @@
           const listRepeat = listView.$.repeat;
           const imageData = listRepeat.itemForElement(itemView);
 
-          this.frame.setPath('photos/' + imageData.id);
+          this.container.path = `/photos/${imageData.id}`;
         });
       }
     }

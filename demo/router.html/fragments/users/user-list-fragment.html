@@ -1,0 +1,24 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-list-fragment">
+  <template>
+    <style>
+      :host {
+        background: #cccccc;
+        display: block;
+      }
+    </style>
+
+    <h2>user-list-fragment</h2>
+  </template>
+
+  <script>
+    class UserListFragment extends Polymer.Element {
+      static get is() {
+        return 'user-list-fragment';
+      }
+    }
+
+    window.customElements.define(UserListFragment.is, UserListFragment);
+  </script>
+</dom-module>

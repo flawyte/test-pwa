@@ -1,8 +1,8 @@
-<link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../fragments/home-fragment.html">
-<link rel="import" href="../fragments/image-details-fragment.html">
 <link rel="import" href="../views/fragments/main-view.html">
+<link rel="import" href="../app-fragment.html">
+<link rel="import" href="home-fragment.html">
+<link rel="import" href="image-details-fragment.html">
 
 <dom-module id="main-fragment">
   <template>
@@ -15,128 +15,36 @@
     </style>
 
     <main-view id="view">
-      <home-fragment id="home" data-route=""></home-fragment>
-      <image-details-fragment id="details" data-route="photos/([0-9]+):id"></image-details-fragment>
+      <home-fragment id="home"
+        data-route="^/$"></home-fragment>
+      <image-details-fragment id="details"
+        data-route="^/photos/([0-9]+):imageId$"></image-details-fragment>
     </main-view>
-
-    <app-location id="location" on-route-changed="_onRouteChanged"></app-location>
   </template>
 
   <script>
-    class MainFragment extends Polymer.Element {
+    class MainFragment extends AppFragment(Polymer.Element) {
       static get is() {
         return 'main-fragment';
       }
 
       static get properties() {
         return {
-          basePath: {
+          path: {
+            notify: true,
+            observer: '_pathChanged',
             type: String
           }
         };
       }
 
-      _dataFromPath(path, route) {
-        const params = this._extractParamsFromRoute(route);
-        if (params.length == 0) return null;
-
-        const data = {};
-
-        for (let i = 0; i < params.length; i++) {
-          const param = params[i];
-          const name = param.split(':')[1];
-          const regex = param.split(':')[0];
-          const value = path.match(new RegExp(route.replace(`${param}`, `(${regex})`)))[1];
-
-          data[name] = value;
-        }
-
-        return data;
+      get fragments() {
+        return Array.prototype.slice.call(this.$.view.children);
       }
 
-      _extractParamsFromRoute(route) {
-        const params = route.match(/(\(.*\):[a-zA-Z]+)\/?/);
-
-        if (!params) return [];
-
-        return params.slice(1);
-      }
-
-      _initFragments(fragments) {
-        this.fragments = fragments;
-
-        this.fragments.forEach(item => {
-          item.frame = this;
-          item.style.display = 'none';
-        });
-      }
-
-      _onRouteChanged(e) {
-        if (!this.ignoreNextRouteChange) {
-          this.setPath(this.$.location.path.slice(this.basePath.length));
-        }
-
-        this.ignoreNextRouteChange = false;
-      }
-
-      _pathToFragment(path) {
-        const fragment = this.fragments.find(frag => {
-          const route = frag.dataset.route;
-          const regex = route.replace(/:\w+/, '');
-          const match = new RegExp('^'+regex+'$').test(path);
-
-          return match;
-        });
-
-        return fragment || null;
-      }
-
-      constructor() {
-        super();
-        this.fragments = [];
-        this.ignoreNextRouteChange = true;
-        this.visibleFragments = [];
-      }
-
-      onVisible() {
-        this.setPath(this.$.location.path.slice(this.basePath.length));
-      }
-
-      ready() {
-        super.ready();
-        this._initFragments(Array.prototype.slice.call(this.$.view.children));
-      }
-
-      setPath(path) {
-        const fragment = this._pathToFragment(path);
-        const data = this._dataFromPath(path, fragment.dataset.route);
-
-        this.setVisibleFragment(fragment, data);
-
-        path = this.basePath + path;
-        if (path != this.$.location.path) {
-          this.ignoreNextRouteChange = true;
-          this.$.location.path = path;
-        }
-      }
-
-      setVisibleFragment(fragment, data) {
-        // If fragment is already visible
-        if (this.visibleFragments.indexOf(fragment) !== -1) {
-          // Just pass it new data and return
-          (typeof fragment.onData === 'function') && fragment.onData(data);
-          return;
-        }
-
-        this.visibleFragments.forEach(item => {
-          item.style.display = 'none';
-          (typeof item.onInvisible === 'function') && item.onInvisible();
-        });
-
-        fragment.style.display = '';
-        (typeof fragment.onVisible === 'function') && fragment.onVisible();
-        (typeof fragment.onData === 'function') && fragment.onData(data);
-        this.visibleFragments = [fragment];
+      // Override this method to avoid [databinding-calls-must-be-functions] warning when running `polymer lint`
+      _pathChanged(path) {
+        super._pathChanged(path);
       }
     }
 

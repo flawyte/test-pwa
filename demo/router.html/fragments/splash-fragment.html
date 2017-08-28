@@ -1,0 +1,31 @@
+<link rel="import" href="../../../bower_components/polymer/lib/utils/render-status.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="splash-fragment">
+  <template>
+    <style>
+      :host {
+        background: #eeeeee;
+        display: block;
+      }
+    </style>
+
+    <h1>splash-fragment</h1>
+  </template>
+
+  <script>
+    class SplashFragment extends Polymer.Element {
+      static get is() {
+        return 'splash-fragment';
+      }
+
+      onVisible() {
+        setTimeout(() => {
+          this.container.setVisibleFragmentByTag('main-fragment');
+        }, 1000);
+      }
+    }
+
+    window.customElements.define(SplashFragment.is, SplashFragment);
+  </script>
+</dom-module>

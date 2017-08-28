@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/lib/utils/mixin.html">
+
+<script>
+  {
+    window.SingleFragmentContainer = Polymer.dedupingMixin(superClass => {
+      return class extends superClass {
+        constructor() {
+          super();
+          this.visibleFragment = null;
+        }
+
+        setVisibleFragment(fragment) {
+          if (fragment === this.visibleFragment)
+            return;
+
+          const currentFrag = this.visibleFragment;
+
+          if (currentFrag instanceof HTMLElement) {
+            currentFrag.style.display = 'none';
+            if (typeof currentFrag.onInvisible == 'function')
+              currentFrag.onInvisible();
+          }
+
+          fragment.style.display = '';
+          if (typeof fragment.onVisible == 'function')
+            fragment.onVisible();
+
+          this.visibleFragment = fragment;
+        }
+
+        setVisibleFragmentByTag(tag) {
+          this.setVisibleFragment(this.shadowRoot.querySelector(tag));
+        }
+
+        _setUpFragments(fragments) {
+          fragments.forEach(item => {
+            item.container = this;
+            item.style.display = 'none';
+          });
+        }
+      }
+    });
+  }
+
+</script>

@@ -18,12 +18,17 @@
 
   <script>
     class ImageDetailsFragment extends Polymer.Element {
-      static get is() {
-        return 'image-details-fragment';
+      static get properties() {
+        return {
+          imageId: {
+            observer: '__imageIdChanged',
+            type: Number
+          }
+        };
       }
 
-      onData(data) {
-        this.$.view.image = this.$.storage.findById(data.id);
+      static get is() {
+        return 'image-details-fragment';
       }
 
       onVisible() {
@@ -44,8 +49,12 @@
             : composedPath[2];
 
           if (item.id == 'back')
-            this.frame.setPath('');
+            this.container.path = '/';
         });
+      }
+
+      __imageIdChanged(imageId) {
+        this.$.view.image = this.$.storage.findById(imageId);
       }
     }
 

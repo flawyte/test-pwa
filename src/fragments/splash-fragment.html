@@ -23,7 +23,7 @@
       }
 
       onVisible() {
-        this.$.service.fetch().then(() => this.frame.setVisibleFragmentByTag('main-fragment'));
+        this.$.service.fetch().then(() => this.container.setVisibleFragmentByTag('main-fragment'));
       }
 
       ready() {

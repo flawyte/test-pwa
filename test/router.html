@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="/bower_components/web-component-tester/browser.js"></script>
+    <link rel="import" href="/src/router.html">
+  </head>
+  <body>
+
+    <script>
+      class Base {}
+      class TestRouter extends Router(Base) {}
+
+      suite('__dataFromPath()', function() {
+        var r = new TestRouter();
+
+        suite('returns empty object', function() {
+          test('when no data found', function() {
+            assert.deepEqual({}, r.__dataFromPath('', ''));
+            assert.deepEqual({}, r.__dataFromPath('/', '.*'));
+            assert.deepEqual({}, r.__dataFromPath('/products', '.*'));
+            assert.deepEqual({}, r.__dataFromPath('/products/123/reviews', '.*'));
+          });
+        });
+
+        suite('returns non-empty object', function() {
+          test('when data found', function() {
+            assert.deepEqual(r.__dataFromPath('/about', '(.*):page'), {
+              page: '/about'
+            });
+
+            assert.deepEqual(r.__dataFromPath('/about', '/(\\w+):page'), {
+              page: 'about'
+            });
+
+            assert.deepEqual(r.__dataFromPath('/frameworks/polymer', '/(\\w+):category/(\\w+):toolName'), {
+              category: 'frameworks',
+              toolName: 'polymer'
+            });
+
+            assert.deepEqual(r.__dataFromPath('/products/123', '/products/([0-9]+):id'), {
+              id: '123'
+            });
+
+            assert.deepEqual(r.__dataFromPath('/products/', '/products(.*):subpath'), {
+              subpath: '/'
+            });
+            assert.deepEqual(r.__dataFromPath('/products/123', '/products(.*):subpath'), {
+              subpath: '/123'
+            });
+            assert.deepEqual(r.__dataFromPath('/products/123/reviews', '/products(.*):subpath'), {
+              subpath: '/123/reviews'
+            });
+            assert.deepEqual(r.__dataFromPath('/products/123/reviews', '/products/([0-9]+):id'), {
+              id: '123'
+            });
+            assert.deepEqual(r.__dataFromPath('/products/123/reviews', '/products/([0-9]+):id/(\\w+):subfragment'), {
+              id: '123',
+              subfragment: 'reviews'
+            });
+
+            assert.deepEqual(r.__dataFromPath('/products/123/reviews/456', '/products/([0-9]+):productId/(\\w+):subfragment/([0-9]+):reviewId'), {
+              productId: '123',
+              reviewId: '456',
+              subfragment: 'reviews'
+            });
+            assert.deepEqual(r.__dataFromPath('/products/123/reviews/456', '/products/([0-9]+):productId/reviews/([0-9]+):reviewId'), {
+              productId: '123',
+              reviewId: '456'
+            });
+          });
+        });
+
+        suite('throws', function() {
+          test('when path does not match pattern', function() {
+            assert.throws(function() {
+              r.__dataFromPath('/products/123', '/users/([0-9]+):productId');
+            });
+          });
+        });
+      });
+
+      suite('__extractParamsFromPattern()', function() {
+        var r = new TestRouter();
+
+        suite('returns empty array', function() {
+          test('when no parameter found', function() {
+            assert.deepEqual(r.__extractParamsFromPattern('/'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products/123/reviews'), []);
+
+            assert.deepEqual(r.__extractParamsFromPattern('/.*'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products.*'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products/123/reviews.*'), []);
+
+            assert.deepEqual(r.__extractParamsFromPattern('/(.*)'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products(.*)'), []);
+            assert.deepEqual(r.__extractParamsFromPattern('/products/123/reviews(.*)'), []);
+          });
+        });
+
+        suite('returns non-empty array', function() {
+          test('when parameter(s) found', function() {
+            assert.deepEqual(r.__extractParamsFromPattern('/products/(\\w+):category'), [{
+              name: 'category',
+              regex: '(\\w+)'
+            }]);
+            assert.deepEqual(r.__extractParamsFromPattern('/products/([0-9]+):id$'), [{
+              name: 'id',
+              regex: '([0-9]+)'
+            }]);
+
+            assert.deepEqual(r.__extractParamsFromPattern('/(\\w+):category/([0-9]+):id'), [{
+              name: 'category',
+              regex: '(\\w+)'
+            }, {
+              name: 'id',
+              regex: '([0-9]+)'
+            }]);
+          });
+        });
+      });
+
+      suite('_pathChanged()', function() {
+        test('calls handler with expected args', function() {
+          var r = new TestRouter();
+          var spy = sinon.spy();
+
+          r.addRoute('^/$', spy);
+          r.addRoute('^/about$', spy);
+          r.addRoute('^/about-us', spy);
+          r.addRoute('^/products/([0-9]+):id', spy);
+          r.addRoute('^/users/([0-9]+):id$', spy);
+          r.addRoute('^/users/([0-9]+):id/images$', spy);
+          r.addRoute('^/users/([0-9]+):userId/images/([0-9]+):imageId$', spy);
+          r.addRoute('^/wallpapers/([0-9]+):id1/likes/([0-9]+):id2', spy);
+
+          r._pathChanged('/');
+          r._pathChanged('/about');
+          r._pathChanged('/about-us');
+          r._pathChanged('/about-us/');
+          r._pathChanged('/about-us/project');
+          r._pathChanged('/about-us/team');
+          r._pathChanged('/products/147');
+          r._pathChanged('/products/147/gallery');
+          r._pathChanged('/products/147/reviews');
+          r._pathChanged('/products/147/reviews/258');
+          r._pathChanged('/users/123');
+          r._pathChanged('/users/123/images');
+          r._pathChanged('/users/123/images/456');
+          r._pathChanged('/wallpapers/123/likes/456');
+          r._pathChanged('/wallpapers/123/likes/456/foo/bar');
+          r._pathChanged('/wallpapers/123/likes/456/profile');
+
+          assert(spy.withArgs({}, null).calledTwice);
+          assert(spy.withArgs({}, '/').calledTwice);
+          assert(spy.withArgs({}, '/project').calledOnce);
+          assert(spy.withArgs({}, '/team').calledOnce);
+          assert(spy.withArgs({id: '147'}, '/').calledOnce);
+          assert(spy.withArgs({id: '147'}, '/gallery').calledOnce);
+          assert(spy.withArgs({id: '147'}, '/reviews').calledOnce);
+          assert(spy.withArgs({id: '147'}, '/reviews/258').calledOnce);
+          assert(spy.withArgs({id: '123'}, null).calledTwice);
+          assert(spy.withArgs({imageId: '456', userId: '123'}, null).calledOnce);
+          assert(spy.withArgs({id1: '123', id2: '456'}, '/').calledOnce);
+          assert(spy.withArgs({id1: '123', id2: '456'}, '/foo/bar').calledOnce);
+          assert(spy.withArgs({id1: '123', id2: '456'}, '/profile').calledOnce);
+        });
+
+        test('passes if no match found', function() {
+          var r = new TestRouter();
+
+          r.addRoute('^/$', 1);
+          r.addRoute('^/about$', 2);
+          r._pathChanged('/foobar');
+        });
+      });
+
+      suite('addRoute()', function() {
+        test('add item to .routes Array', function() {
+          var r = new TestRouter();
+
+          assert.equal(r.routes.length, 0);
+
+          var handler = () => {};
+          var pattern = '/';
+          r.addRoute(pattern, handler);
+          assert.equal(r.routes.length, 1);
+          assert.equal(r.routes[0].handler, handler);
+          assert.equal(r.routes[0].pattern, pattern);
+        });
+      });
+
+      suite('match()', function() {
+        test('returns null when no route added', function() {
+          var r = new TestRouter();
+
+          assert.equal(r.match('/foobar'), null);
+        });
+
+        test('returns null when no match found', function() {
+          var r = new TestRouter();
+
+          r.addRoute('^/$', 1);
+          r.addRoute('^/about$', 2);
+
+          assert.equal(r.match('/about/project'), null);
+          assert.equal(r.match('/foobar'), null);
+          assert.equal(r.match('project/about'), null);
+        });
+
+        test('returns first route matched (1)', function() {
+          var r = new TestRouter();
+
+          r.addRoute('/', 1);
+          r.addRoute('/about', 2);
+          assert.equal(r.match('/').handler, 1);
+          assert.equal(r.match('/about').handler, 1);
+        });
+
+        test('returns first route matched (2)', function() {
+          var r = new TestRouter();
+
+          r.addRoute('/$', 1);
+          r.addRoute('/about$', 2);
+          r.addRoute('^/users/([0-9]+):userId/images/([0-9]+):imageId$', 3);
+          r.addRoute('^/([0-9]+):id1/foo/([0-9]+):id2/bar/([0-9]+):id3$', 4);
+          assert.equal(r.match('/').handler, 1);
+          assert.equal(r.match('/about').handler, 2);
+          assert.equal(r.match('/users/123/images/456').handler, 3);
+          assert.equal(r.match('/123/foo/456/bar/789').handler, 4);
+        });
+      });
+    </script>
+
+  </body>
+</html>

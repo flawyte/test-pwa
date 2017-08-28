@@ -1,0 +1,69 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../src/app-fragment.html">
+<link rel="import" href="page404-fragment.html">
+<link rel="import" href="users/user-list-fragment.html">
+<link rel="import" href="users/user-profile-fragment.html">
+<link rel="import" href="users/user-reviews-fragment.html">
+
+<dom-module id="users-fragment">
+  <template>
+    <style>
+      :host {
+        background: #dddddd;
+        display: block;
+      }
+    </style>
+
+    <h2>users-fragment</h2>
+    <p>path: '[[path]]'</p>
+
+    <button on-click="__backToRoot">BACK to '/'</button>
+
+    <div id="frame">
+      <user-list-fragment id="list"
+        data-route="^/$"></user-list-fragment>
+
+      <user-profile-fragment id="profile"
+        data-route="^/([0-9]+):userId$"></user-profile-fragment>
+
+      <user-reviews-fragment id="reviews"
+        data-route="^/([0-9]+):userId/reviews$"></user-reviews-fragment>
+
+      <page404-fragment id="page404"
+        data-route=".*"></page404-fragment>
+    </div>
+  </template>
+
+  <script>
+    class UsersFragment extends AppFragment(Polymer.Element) {
+      static get is() {
+        return 'users-fragment';
+      }
+
+      static get properties() {
+        return {
+          path: {
+            notify: true,
+            observer: '_pathChanged',
+            type: String
+          }
+        };
+      }
+
+      get fragments() {
+        return Array.prototype.slice.call(this.$.frame.children);
+      }
+
+      // Override this method to avoid [databinding-calls-must-be-functions] warning when running `polymer lint`
+      _pathChanged(path) {
+        super._pathChanged(path);
+      }
+
+      __backToRoot() {
+        this.container.path = '/';
+      }
+    }
+
+    window.customElements.define(UsersFragment.is, UsersFragment);
+  </script>
+</dom-module>

@@ -1,0 +1,42 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-profile-fragment">
+  <template>
+    <style>
+      :host {
+        background: #cccccc;
+        display: block;
+      }
+    </style>
+
+    <h2>user-profile-fragment</h2>
+    <pre>userId: [[userId]]</pre>
+
+    <button on-click="__backToRoot">BACK to '/'</button>
+    <button on-click="__goToUserReviews">GO to '/[[userId]]/reviews'</button>
+  </template>
+
+  <script>
+    class UserProfileFragment extends Polymer.Element {
+      static get is() {
+        return 'user-profile-fragment';
+      }
+
+      static get properties() {
+        return {
+          userId: Number
+        };
+      }
+
+      __backToRoot() {
+        this.container.path = '/';
+      }
+
+      __goToUserReviews() {
+        this.container.path = '/' + this.userId + '/reviews';
+      }
+    }
+
+    window.customElements.define(UserProfileFragment.is, UserProfileFragment);
+  </script>
+</dom-module>

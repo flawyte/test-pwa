@@ -1,0 +1,83 @@
+<link rel="import" href="../bower_components/polymer/lib/utils/mixin.html">
+
+<script>
+  {
+    window.Router = Polymer.dedupingMixin(superClass => {
+      return class extends superClass {
+        constructor() {
+          super();
+          this.routes = [];
+        }
+
+        addRoute(pattern, handler) {
+          const regex = pattern
+            .replace(/:\w+/g, '')
+            .replace(/\(/g, '')
+            .replace(/\)/g, '');
+
+          this.routes.push({handler, pattern, regex});
+        }
+
+        match(path) {
+          return this.routes.find(route => {
+            return new RegExp(route.pattern.replace(/:\w+/g, '')).test(path);
+          }) || null;
+        }
+
+        _pathChanged(path) {
+          const route = this.match(path);
+          if (!route)
+            return;
+
+          let subPath = null;
+          // If route's path regex doesn't end with '$' (it means sub-paths are allowed)
+          if (!new RegExp(/\$$/).test(route.regex)) {
+            // Extract the sub-path
+            subPath = path.match(new RegExp(route.regex + '(.*)'))[1];
+
+            // Make sure we don't pass an empty sub-path
+            if (subPath == '')
+              subPath = '/';
+          }
+
+          const params = this.__dataFromPath(path, route.pattern);
+          route.handler(params, subPath);
+        }
+
+        __dataFromPath(path, pattern) {
+          const params = this.__extractParamsFromPattern(pattern);
+          let route = pattern;
+
+          params.forEach(param => {
+            route = route.replace(`:${param.name}`, '');
+          });
+          if (params.length === 0) return {};
+
+          const matches = path.match(new RegExp(route));
+          if (matches == null) throw new Error(`path '${path}' doesn't match route '${route}'`);
+
+          const data = {};
+          matches.slice(1).forEach((value, index) => {
+            data[params[index].name] = value;
+          });
+
+          return data;
+        }
+
+        __extractParamsFromPattern(pattern) {
+          return pattern.split('/')
+            .filter(item => /(\(.*\):[a-zA-Z]+)/.test(item))
+            .map(item => {
+              const t = item.split(':');
+
+              return {
+                name: t[1].match(/\w+/)[0],
+                regex: t[0]
+              };
+            })
+          ;
+        }
+      };
+    });
+  }
+</script>

@@ -1,0 +1,68 @@
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../src/single-fragment-container.html">
+<link rel="import" href="fragments/main-fragment.html">
+<link rel="import" href="fragments/splash-fragment.html">
+
+<dom-module id="router-demo">
+  <template>
+    <style>
+      :host {
+        background: #ffffff;
+        display: block;
+      }
+
+      #frame {
+        height: 100%;
+        width: 100%;
+      }
+      #frame > * {
+        position: absolute;
+        width: 100%;
+      }
+    </style>
+
+    <app-location id="location"
+      path="{{path}}"
+      use-hash-as-path></app-location>
+
+    <paper-input id="input"
+      label="Path"
+      value="{{path}}"></paper-input>
+
+    <div id="frame">
+      <main-fragment id="main" path="{{path}}"></main-fragment>
+      <splash-fragment id="splash"></splash-fragment>
+    </div>
+  </template>
+
+  <script>
+    class RouterDemo extends SingleFragmentContainer(Polymer.Element) {
+      static get is() {
+        return 'router-demo';
+      }
+
+      static get properties() {
+        return {
+          path: {
+            observer: '__pathChanged'
+          }
+        };
+      }
+
+      __pathChanged(path) {
+        if (!path.startsWith('/'))
+          this.path = '/' + path;
+      }
+
+      ready() {
+        super.ready();
+        this._setUpFragments(Array.prototype.slice.call(this.$.frame.children));
+        this.setVisibleFragmentByTag('splash-fragment');
+      }
+    }
+
+    window.customElements.define(RouterDemo.is, RouterDemo);
+  </script>
+</dom-module>

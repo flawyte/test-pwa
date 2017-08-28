@@ -1,8 +1,10 @@
+<link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="fragments/main-fragment.html">
 <link rel="import" href="fragments/splash-fragment.html">
+<link rel="import" href="single-fragment-container.html">
 
 <dom-module id="test-pwa-app">
   <template>
@@ -31,12 +33,19 @@
       }
     </style>
 
+    <app-location id="location"
+      path="{{path}}"
+      use-hash-as-path="[[useHashAsPath]]"></app-location>
+
     <div id="frame">
       <div>
-        <splash-fragment id="splashFragment"></splash-fragment>
+        <splash-fragment id="splash"
+          class="fragment"></splash-fragment>
       </div>
       <div>
-        <main-fragment id="mainFragment"></main-fragment>
+        <main-fragment id="main"
+          class="fragment"
+          path="{{path}}"></main-fragment>
       </div>
     </div>
 
@@ -46,43 +55,26 @@
   </template>
 
   <script>
-    class TestPwaApp extends Polymer.Element {
+    class TestPwaApp extends SingleFragmentContainer(Polymer.Element) {
+      static get properties() {
+        return {
+          path: {
+            observer: '__pathChanged'
+          }
+        };
+      }
+
       static get is() {
         return 'test-pwa-app';
       }
 
-      constructor() {
-        super();
-        this.fragments = [];
-        this.visibleFragments = [];
-      }
-
-      _onToastPositiveButtonTapped() {
-        window.location.reload(true);
-      }
-
-      initFragments() {
-        this.fragments = [
-          this.$.mainFragment,
-          this.$.splashFragment
-        ];
-
-        this.$.mainFragment.basePath = localStorage.getItem('app-path');
-
-        this.fragments.forEach(item => {
-          item.frame = this;
-          item.style.display = 'none';
-        });
-      }
-
       ready() {
         super.ready();
+        this._setUpFragments(Array.prototype.slice.call(this.shadowRoot.querySelectorAll('.fragment')));
+        this.setVisibleFragmentByTag('splash-fragment');
 
         if (navigator.serviceWorker)
           this.registerServiceWorker();
-
-        this.initFragments();
-        this.setVisibleFragment(this.$.splashFragment);
       }
 
       registerServiceWorker() {
@@ -128,21 +120,17 @@
         });
       }
 
-      setVisibleFragment(fragment) {
-        if (this.visibleFragments.indexOf(fragment) !== -1) return;
-
-        this.visibleFragments.forEach(item => {
-          item.style.display = 'none';
-          (typeof item.onInvisible === 'function') && item.onInvisible();
-        });
-
-        fragment.style.display = '';
-        (typeof fragment.onVisible === 'function') && fragment.onVisible();
-        this.visibleFragments = [fragment];
+      _onToastPositiveButtonTapped() {
+        window.location.reload(true);
       }
 
-      setVisibleFragmentByTag(tag) {
-        this.setVisibleFragment(this.shadowRoot.querySelector(tag));
+      get useHashAsPath() {
+        return window.location.origin.indexOf('flawyte.github.io') > -1;
+      }
+
+      __pathChanged(path) {
+        if (!path.startsWith('/'))
+          this.path = '/' + path;
       }
     }
 
