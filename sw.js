@@ -460,7 +460,7 @@ const fileManifest = [
   },
   {
     "url": "src/fragments/splash-fragment.html",
-    "revision": "fa98b882a7b1e360b09b54a98cd41c7b"
+    "revision": "cba87c2d222dd84e6f57dda00bf2b846"
   },
   {
     "url": "src/router.html",
@@ -472,7 +472,7 @@ const fileManifest = [
   },
   {
     "url": "src/test-pwa-app.html",
-    "revision": "6c36afa90b410fcb78ab5f455c58e44c"
+    "revision": "0ade3ea2ca6db0d27d06a1c0b1245bb0"
   },
   {
     "url": "src/views/fragments/home-view.html",
