@@ -1,6 +1,6 @@
 {
   "name": "test-pwa",
-  "description": "Discovering Progressive Web App(s) by building one using Polymer 2, Service Workers etc.",
+  "description": "Discovering Progressive Web App(s) by building one using Polymer 2, ES6, Workbox and more.",
   "main": "index.html",
   "dependencies": {
     "app-layout": "^2.0.1",
@@ -18,5 +18,6 @@
     "paper-input": "^2.0.1",
     "web-component-tester": "^6.1.2",
     "webcomponentsjs": "^1.0.1"
-  }
+  },
+  "version": "0.0.0"
 }

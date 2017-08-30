@@ -1,0 +1,29 @@
+{
+  "name": "test-pwa",
+  "author": "Mickaël Allonneau <mickael.allonneau@gmail.com> (https://flawyte.github.io)",
+  "bugs": {
+    "url": "https://github.com/flawyte/test-pwa/issues"
+  },
+  "description": "Discovering Progressive Web App(s) by building one using Polymer 2, ES6, Workbox and more.",
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/flawyte/test-pwa#readme",
+  "keywords": [
+    "es6",
+    "polymer",
+    "progressive-web-app",
+    "service-worker",
+    "workbox"
+  ],
+  "license": "ISC",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flawyte/test-pwa.git"
+  },
+  "scripts": {
+    "test": "polymer test"
+  },
+  "version": "0.0.0"
+}
