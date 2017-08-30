@@ -33,6 +33,10 @@
 
       onVisible() {
         this.$.view.shadowRoot.querySelector('app-header-layout').notifyResize();
+
+        if (this.$.view.image) {
+          window.document.title = `${this.$.view.image.name} by @${this.$.view.image.user.username}`;
+        }
       }
 
       ready() {
@@ -55,6 +59,7 @@
 
       __imageIdChanged(imageId) {
         this.$.view.image = this.$.storage.findById(imageId);
+        window.document.title = `${this.$.view.image.name} by @${this.$.view.image.user.username}`;
       }
     }
 
