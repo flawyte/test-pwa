@@ -1,1 +1,32 @@
-<html><head><link rel="import" href="../../bower_components/polymer/polymer-element.html"></head><body><dom-module id="page404-view"><template><style>:host{align-items:center;background:white;display:flex;height:100%;justify-content:center;width:100%;}</style><div><h1>Oops!</h1><p>There's nothing here...</p></div></template><script>var Page404View=function(a){function b(){return babelHelpers.classCallCheck(this,b),babelHelpers.possibleConstructorReturn(this,(b.__proto__||Object.getPrototypeOf(b)).apply(this,arguments))}return babelHelpers.inherits(b,a),babelHelpers.createClass(b,null,[{key:'is',get:function(){return'page404-view'}}]),b}(Polymer.Element);window.customElements.define(Page404View.is,Page404View);</script></dom-module></body></html>
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="page404-view">
+  <template>
+    <style>
+      :host {
+        align-items: center;
+        background: white;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
+    </style>
+
+    <div>
+      <h1>Oops!</h1>
+
+      <p>There's nothing here...</p>
+    </div>
+  </template>
+
+  <script>
+    class Page404View extends Polymer.Element {
+      static get is() {
+        return 'page404-view';
+      }
+    }
+
+    window.customElements.define(Page404View.is, Page404View);
+  </script>
+</dom-module>

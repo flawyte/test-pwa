@@ -1,1 +1,83 @@
-<html><head><link rel="import" href="../bower_components/polymer/lib/utils/mixin.html"><script>window.Router=Polymer.dedupingMixin(function(a){return function(b){function c(){babelHelpers.classCallCheck(this,c);var d=babelHelpers.possibleConstructorReturn(this,(c.__proto__||Object.getPrototypeOf(c)).call(this));return d.routes=[],d}return babelHelpers.inherits(c,b),babelHelpers.createClass(c,[{key:'addRoute',value:function(e,f){var g=e.replace(/:\w+/g,'').replace(/\(/g,'').replace(/\)/g,'');this.routes.push({handler:f,pattern:e,regex:g})}},{key:'match',value:function(e){return this.routes.find(function(f){return new RegExp(f.pattern.replace(/:\w+/g,'')).test(e)})||null}},{key:'_pathChanged',value:function(e){var f=this.match(e);if(f){var g=null;new RegExp(/\$$/).test(f.regex)||(g=e.match(new RegExp(f.regex+'(.*)'))[1],''==g&&(g='/'));var h=this.__dataFromPath(e,f.pattern);f.handler(h,g)}}},{key:'__dataFromPath',value:function(e,f){var g=this.__extractParamsFromPattern(f),h=f;if(g.forEach(function(k){h=h.replace(':'+k.name,'')}),0===g.length)return{};var i=e.match(new RegExp(h));if(null==i)throw new Error('path \''+e+'\' doesn\'t match route \''+h+'\'');var j={};return i.slice(1).forEach(function(k,l){j[g[l].name]=k}),j}},{key:'__extractParamsFromPattern',value:function(e){return e.split('/').filter(function(f){return /(\(.*\):[a-zA-Z]+)/.test(f)}).map(function(f){var g=f.split(':');return{name:g[1].match(/\w+/)[0],regex:g[0]}})}}]),c}(a)});</script></head><body></body></html>
+<link rel="import" href="../bower_components/polymer/lib/utils/mixin.html">
+
+<script>
+  {
+    window.Router = Polymer.dedupingMixin(superClass => {
+      return class extends superClass {
+        constructor() {
+          super();
+          this.routes = [];
+        }
+
+        addRoute(pattern, handler) {
+          const regex = pattern
+            .replace(/:\w+/g, '')
+            .replace(/\(/g, '')
+            .replace(/\)/g, '');
+
+          this.routes.push({handler, pattern, regex});
+        }
+
+        match(path) {
+          return this.routes.find(route => {
+            return new RegExp(route.pattern.replace(/:\w+/g, '')).test(path);
+          }) || null;
+        }
+
+        _pathChanged(path) {
+          const route = this.match(path);
+          if (!route)
+            return;
+
+          let subPath = null;
+          // If route's path regex doesn't end with '$' (it means sub-paths are allowed)
+          if (!new RegExp(/\$$/).test(route.regex)) {
+            // Extract the sub-path
+            subPath = path.match(new RegExp(route.regex + '(.*)'))[1];
+
+            // Make sure we don't pass an empty sub-path
+            if (subPath == '')
+              subPath = '/';
+          }
+
+          const params = this.__dataFromPath(path, route.pattern);
+          route.handler(params, subPath);
+        }
+
+        __dataFromPath(path, pattern) {
+          const params = this.__extractParamsFromPattern(pattern);
+          let route = pattern;
+
+          params.forEach(param => {
+            route = route.replace(`:${param.name}`, '');
+          });
+          if (params.length === 0) return {};
+
+          const matches = path.match(new RegExp(route));
+          if (matches == null) throw new Error(`path '${path}' doesn't match route '${route}'`);
+
+          const data = {};
+          matches.slice(1).forEach((value, index) => {
+            data[params[index].name] = value;
+          });
+
+          return data;
+        }
+
+        __extractParamsFromPattern(pattern) {
+          return pattern.split('/')
+            .filter(item => /(\(.*\):[a-zA-Z]+)/.test(item))
+            .map(item => {
+              const t = item.split(':');
+
+              return {
+                name: t[1].match(/\w+/)[0],
+                regex: t[0]
+              };
+            })
+          ;
+        }
+      };
+    });
+  }
+</script>

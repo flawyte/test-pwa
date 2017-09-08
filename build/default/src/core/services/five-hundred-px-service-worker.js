@@ -1,1 +1,10 @@
-importScripts('five-hundred-px-service.js');var service=new FiveHundredPxService;onmessage=function(b){var c=b.data;'fetch'==c&&service.fetch().then(function(d){return postMessage(d)})};
+importScripts('five-hundred-px-service.js');
+
+const service = new FiveHundredPxService();
+
+onmessage = (event) => {
+  const request = event.data;
+
+  if (request == 'fetch')
+    service.fetch().then((data) => postMessage(data));
+};

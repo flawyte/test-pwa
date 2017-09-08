@@ -1,1 +1,52 @@
-<html><head><link rel="import" href="../../bower_components/polymer/polymer-element.html"><link rel="import" href="../core/services/five-hundred-px-service.html"><link rel="import" href="../core/storages/five-hundred-px-storage.html"><link rel="import" href="../views/fragments/home-view.html"></head><body><dom-module id="home-fragment"><template><style>:host{display:block;height:100%;width:100%;}</style><five-hundred-px-service id="service"></five-hundred-px-service><five-hundred-px-storage items="{{items}}"></five-hundred-px-storage><home-view images="[[items]]"></home-view></template><script>var HomeFragment=function(a){function b(){return babelHelpers.classCallCheck(this,b),babelHelpers.possibleConstructorReturn(this,(b.__proto__||Object.getPrototypeOf(b)).apply(this,arguments))}return babelHelpers.inherits(b,a),babelHelpers.createClass(b,[{key:'onVisible',value:function(){this.$.service.fetch(),window.document.title='Home'}},{key:'ready',value:function(){var d=this;babelHelpers.get(b.prototype.__proto__||Object.getPrototypeOf(b.prototype),'ready',this).call(this),this.addEventListener('click',function(e){var f=e.composedPath();if('image-list-item-view'==f[2].nodeName.toLowerCase()){var g=f[2],h=f[4],i=h.$.repeat,j=i.itemForElement(g);d.container.path='/photos/'+j.id}})}}],[{key:'is',get:function(){return'home-fragment'}}]),b}(Polymer.Element);window.customElements.define(HomeFragment.is,HomeFragment);</script></dom-module></body></html>
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../core/services/five-hundred-px-service.html">
+<link rel="import" href="../core/storages/five-hundred-px-storage.html">
+<link rel="import" href="../views/fragments/home-view.html">
+
+<dom-module id="home-fragment">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <five-hundred-px-service id="service"></five-hundred-px-service>
+    <five-hundred-px-storage items="{{items}}"></five-hundred-px-storage>
+    <home-view images="[[items]]"></home-view>
+  </template>
+
+  <script>
+    class HomeFragment extends Polymer.Element {
+      static get is() {
+        return 'home-fragment';
+      }
+
+      onVisible() {
+        this.$.service.fetch();
+        window.document.title = 'Home';
+      }
+
+      ready() {
+        super.ready();
+
+        this.addEventListener('click', (event) => {
+          const composedPath = event.composedPath();
+
+          if (composedPath[2].nodeName.toLowerCase() != 'image-list-item-view') return;
+
+          const itemView = composedPath[2];
+          const listView = composedPath[4];
+          const listRepeat = listView.$.repeat;
+          const imageData = listRepeat.itemForElement(itemView);
+
+          this.container.path = `/photos/${imageData.id}`;
+        });
+      }
+    }
+
+    window.customElements.define(HomeFragment.is, HomeFragment);
+  </script>
+</dom-module>

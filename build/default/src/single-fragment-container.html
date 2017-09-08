@@ -1,1 +1,45 @@
-<html><head><link rel="import" href="../bower_components/polymer/lib/utils/mixin.html"><script>window.SingleFragmentContainer=Polymer.dedupingMixin(function(a){return function(b){function c(){babelHelpers.classCallCheck(this,c);var d=babelHelpers.possibleConstructorReturn(this,(c.__proto__||Object.getPrototypeOf(c)).call(this));return d.visibleFragment=null,d}return babelHelpers.inherits(c,b),babelHelpers.createClass(c,[{key:'setVisibleFragment',value:function(e){if(e!==this.visibleFragment){var f=this.visibleFragment;f instanceof HTMLElement&&(f.style.display='none','function'==typeof f.onInvisible&&f.onInvisible()),e.style.display='','function'==typeof e.onVisible&&e.onVisible(),this.visibleFragment=e}}},{key:'setVisibleFragmentByTag',value:function(e){this.setVisibleFragment(this.shadowRoot.querySelector(e))}},{key:'_setUpFragments',value:function(e){var f=this;e.forEach(function(g){g.container=f,g.style.display='none'})}}]),c}(a)});</script></head><body></body></html>
+<link rel="import" href="../bower_components/polymer/lib/utils/mixin.html">
+
+<script>
+  {
+    window.SingleFragmentContainer = Polymer.dedupingMixin(superClass => {
+      return class extends superClass {
+        constructor() {
+          super();
+          this.visibleFragment = null;
+        }
+
+        setVisibleFragment(fragment) {
+          if (fragment === this.visibleFragment)
+            return;
+
+          const currentFrag = this.visibleFragment;
+
+          if (currentFrag instanceof HTMLElement) {
+            currentFrag.style.display = 'none';
+            if (typeof currentFrag.onInvisible == 'function')
+              currentFrag.onInvisible();
+          }
+
+          fragment.style.display = '';
+          if (typeof fragment.onVisible == 'function')
+            fragment.onVisible();
+
+          this.visibleFragment = fragment;
+        }
+
+        setVisibleFragmentByTag(tag) {
+          this.setVisibleFragment(this.shadowRoot.querySelector(tag));
+        }
+
+        _setUpFragments(fragments) {
+          fragments.forEach(item => {
+            item.container = this;
+            item.style.display = 'none';
+          });
+        }
+      }
+    });
+  }
+
+</script>

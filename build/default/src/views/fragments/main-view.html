@@ -1,1 +1,57 @@
-<html><head><link rel="import" href="../../../bower_components/shadycss/apply-shim.html"><link rel="import" href="../../../bower_components/paper-styles/shadow.html"><link rel="import" href="../../../bower_components/polymer/polymer-element.html"></head><body><dom-module id="main-view"><template><style>:host{background:#eeeeee;display:block;height:100%;overflow:auto;width:100%;}#content{@apply --shadow-elevation-2dp;height:100%;margin:auto;max-width:960px;}@media (min-width: 1025px){:host::-webkit-scrollbar{background:transparent;width:0.75em;}:host::-webkit-scrollbar-thumb{background:rgba(85, 85, 85, 0.25);}:host::-webkit-scrollbar-track{}}</style><div id="content"><slot></slot></div></template><script>var MainView=function(a){function b(){return babelHelpers.classCallCheck(this,b),babelHelpers.possibleConstructorReturn(this,(b.__proto__||Object.getPrototypeOf(b)).apply(this,arguments))}return babelHelpers.inherits(b,a),babelHelpers.createClass(b,null,[{key:'is',get:function(){return'main-view'}},{key:'properties',get:function(){return{images:Array}}}]),b}(Polymer.Element);window.customElements.define(MainView.is,MainView);</script></dom-module></body></html>
+<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="main-view">
+  <template>
+    <style>
+      :host {
+        background: #eeeeee;
+        display: block;
+        height: 100%;
+        overflow: auto;
+        width: 100%;
+      }
+
+      #content {
+        @apply --shadow-elevation-2dp;
+
+        height: 100%;
+        margin: auto;
+        max-width: 960px;
+      }
+
+      @media (min-width: 1025px) {
+        :host::-webkit-scrollbar {
+          background: transparent;
+          width: 0.75em;
+        }
+        :host::-webkit-scrollbar-thumb {
+          background: rgba(85, 85, 85, 0.25);
+        }
+        :host::-webkit-scrollbar-track {
+        }
+      }
+    </style>
+
+    <div id="content">
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    class MainView extends Polymer.Element {
+      static get is() {
+        return 'main-view';
+      }
+
+      static get properties() {
+        return {
+          images: Array
+        };
+      }
+    }
+
+    window.customElements.define(MainView.is, MainView);
+  </script>
+</dom-module>
