@@ -5,6 +5,20 @@
     "url": "https://github.com/flawyte/test-pwa/issues"
   },
   "description": "Discovering Progressive Web App(s) by building one using Polymer 2, ES6, Workbox and more.",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "css-slam": "^2.0.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^3.0.0",
+    "merge-stream": "^1.0.1",
+    "polymer-build": "^2.0.0",
+    "workbox-build": "^2.0.3"
+  },
   "directories": {
     "test": "test"
   },
